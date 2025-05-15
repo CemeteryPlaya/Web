@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru">
+    	
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inter Cargo - доставка из Китая в Казахстан</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#e53e3e',secondary:'#4a5568'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}"/>
+    <script src="{% static 'scripts/scripts.js' %}"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Навигационная панель -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="#" class="text-2xl font-['Pacifico'] text-primary mr-8"><img src="{% static "images/logo.png" %}" style="height: 50px; width: 50px;"></a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gray-900 font-medium hover:text-primary transition">Главная</a>
+                    <a href="#registration" class="text-gray-700 hover:text-primary transition">Регистрация</a>
+                    <a href="education/" class="text-gray-700 hover:text-primary transition">Обучение</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://www.instagram.com/inter_cargo_trz/" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
+                    <i class="ri-instagram-line text-gray-700"></i>
+                </a>
+                <a href="https://t.me/inter_cargo" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
+                    <i class="ri-telegram-line text-gray-700"></i>
+                </a>
+                <a href="https://wa.me/77066440624" class="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 hover:bg-green-600 transition">
+                    <i class="ri-whatsapp-line text-white"></i>
+                </a>
+                <button class="md:hidden w-10 h-10 flex items-center justify-center">
+                    <i class="ri-menu-line text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero секция с калькулятором -->
+    <section class="relative py-16 md:py-24 overflow-hidden" style="background-image: url('https://readdy.ai/api/search-image?query=A%20world%20map%20with%20logistics%20routes%20highlighted%2C%20showing%20shipping%20connections%20between%20China%20and%20Kazakhstan.%20The%20map%20has%20a%20dark%20gray%20background%20with%20lighter%20gray%20continents%2C%20giving%20a%20professional%20and%20modern%20look.%20The%20map%20shows%20shipping%20routes%20with%20subtle%20red%20lines%20connecting%20China%20and%20Kazakhstan&width=1920&height=800&seq=12345&orientation=landscape'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-12 md:mb-0 text-white">
+                    <div class="text-primary font-medium mb-2">КАЛЬКУЛЯТОР</div>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Узнайте цену доставки груза из Китая в Казахстан</h1>
+                    <p class="text-xl mb-8">Тариф: 1859₸/кг</p>
+                    <a href="#registration" class="inline-flex items-center bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">
+                        Регистрация
+                        <i class="ri-arrow-right-line ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="md:w-5/12">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h2 class="text-xl font-bold text-gray-900 mb-6">Калькулятор</h2>
+                        
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Напишите количество кг</label>
+                            <div class="relative">
+                                <input type="number" id="weight" class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary transition" placeholder="0" min="0" max="100">
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+                                    <button id="increment" class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-gray-700">
+                                        <i class="ri-arrow-up-s-line"></i>
+                                    </button>
+                                    <button id="decrement" class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-gray-700">
+                                        <i class="ri-arrow-down-s-line"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="text-xs text-gray-500 mt-1">Мин: 0 - Макс: 100</div>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded p-4 mb-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="font-medium text-gray-700">Итого</h3>
+                                <button class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-gray-700">
+                                    <i class="ri-information-line"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="flex justify-between py-2 border-b border-gray-200">
+                                <span class="text-gray-600">Название</span>
+                                <span class="text-gray-600">Итого</span>
+                            </div>
+                            
+                            <div class="flex justify-between py-2 border-b border-gray-200">
+                                <span class="text-gray-800">Напишите Количество Кг</span>
+                                <span id="total-weight" class="text-gray-800">0 кг</span>
+                            </div>
+                            
+                            <div class="flex justify-between py-2 font-medium">
+                                <span class="text-gray-900">Общая Сумма</span>
+                                <span id="total-price" class="text-gray-900">0 ₸</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ секция -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <div class="text-primary font-medium mb-2">F.A.Q</div>
+                <h2 class="text-3xl font-bold text-gray-900">Часто задаваемые вопросы</h2>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="space-y-4">
+                    <div class="border border-gray-200 rounded">
+                        <button class="faq-toggle flex justify-between items-center w-full px-6 py-4 text-left font-medium text-gray-900 hover:bg-gray-50 transition" data-target="faq1">
+                            <span>Как рассчитывается стоимость доставки?</span>
+                            <i class="ri-arrow-down-s-line text-xl"></i>
+                        </button>
+                        <div id="faq1" class="faq-content hidden px-6 pb-4">
+                            <p class="text-gray-700">Стоимость доставки рассчитывается по тарифу 1859₸ за килограмм груза. Минимальный вес для расчета - 0 кг, максимальный - 100 кг. Для расчета используйте калькулятор на нашем сайте.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded">
+                        <button class="faq-toggle flex justify-between items-center w-full px-6 py-4 text-left font-medium text-gray-900 hover:bg-gray-50 transition" data-target="faq2">
+                            <span>Какие сроки доставки из Китая в Казахстан?</span>
+                            <i class="ri-arrow-down-s-line text-xl"></i>
+                        </button>
+                        <div id="faq2" class="faq-content hidden px-6 pb-4">
+                            <p class="text-gray-700">Средний срок доставки составляет 10-15 дней с момента получения товара на нашем складе в Китае. Сроки могут варьироваться в зависимости от сезона и загруженности таможенных служб.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded">
+                        <button class="faq-toggle flex justify-between items-center w-full px-6 py-4 text-left font-medium text-gray-900 hover:bg-gray-50 transition" data-target="faq3">
+                            <span>Как зарегистрироваться в системе?</span>
+                            <i class="ri-arrow-down-s-line text-xl"></i>
+                        </button>
+                        <div id="faq3" class="faq-content hidden px-6 pb-4">
+                            <p class="text-gray-700">Для регистрации необходимо заполнить форму на странице "Регистрация", указав свой логин (имя/ник + последние 4 цифры телефона), номер телефона и выбрав удобный пункт выдачи. После регистрации с вами свяжется наш менеджер.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded">
+                        <button class="faq-toggle flex justify-between items-center w-full px-6 py-4 text-left font-medium text-gray-900 hover:bg-gray-50 transition" data-target="faq4">
+                            <span>Какие товары запрещены к перевозке?</span>
+                            <i class="ri-arrow-down-s-line text-xl"></i>
+                        </button>
+                        <div id="faq4" class="faq-content hidden px-6 pb-4">
+                            <p class="text-gray-700">К перевозке запрещены: оружие и его комплектующие, наркотические вещества, взрывчатые вещества, ядовитые и радиоактивные материалы, порнографические материалы, поддельные документы и другие предметы, запрещенные законодательством Казахстана и международными правилами.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded">
+                        <button class="faq-toggle flex justify-between items-center w-full px-6 py-4 text-left font-medium text-gray-900 hover:bg-gray-50 transition" data-target="faq5">
+                            <span>Как отследить мой заказ?</span>
+                            <i class="ri-arrow-down-s-line text-xl"></i>
+                        </button>
+                        <div id="faq5" class="faq-content hidden px-6 pb-4">
+                            <p class="text-gray-700">После оформления заказа вам будет предоставлен трек-номер для отслеживания. Вы можете использовать его на нашем сайте или связаться с менеджером через WhatsApp для получения актуальной информации о статусе вашего груза.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Форма регистрации -->
+    <section id="registration" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <div class="text-primary font-medium mb-2">РЕГИСТРАЦИЯ</div>
+            <h2 class="text-3xl font-bold text-gray-900">Регистрация нового клиента</h2>
+            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Заполните форму ниже, чтобы зарегистрироваться в нашей системе и начать пользоваться услугами доставки из Китая</p>
+        </div>
+        
+        <div class="max-w-xl mx-auto bg-white rounded-lg shadow-lg p-8">
+            <form id="registration-form" method="POST" action="{% url 'register' %}">
+                {% csrf_token %}
+                
+                <div class="mb-6">
+                    <label for="login" class="block text-sm font-medium text-gray-700 mb-2">Логин (Имя/Ник + 4 цифры номера)</label>
+                    <input type="text" id="login" name="login" required class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary transition" placeholder="Например: ANDREY1234">
+                    <div class="text-xs text-gray-500 mt-1">Введите ваше имя или ник и последние 4 цифры номера телефона</div>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Номер телефона</label>
+                    <div class="phone-input">
+                        <input type="text" id="phone" name="phone" required class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary transition" placeholder="(___) ___ - __ - __">
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <label for="pickup" class="block text-sm font-medium text-gray-700 mb-2">Выбор пункта выдачи</label>
+                    <select id="pickup" name="pickup" required class="w-full px-4 py-3 pr-8 border border-gray-300 rounded appearance-none focus:ring-2 focus:ring-primary focus:border-primary transition">
+                        <option value="" disabled selected>Выберите пункт выдачи</option>
+                        <option value="akbulak">Акбулак 21 (Ozon)</option>
+                        <option value="pushkina">Пушкина 8 (Ozon)</option>
+                        <option value="tashkentskaya">Ташкентская 286 (Ozon)</option>
+                        <option value="abaya323">Абая 323 (Beer bochka)</option>
+                        <option value="bayseytovoy">Байсеитовой 30 (Ozon)</option>
+                        <option value="samal">Самал 48 (Wildberries)</option>
+                        <option value="sorokina">Сорокина 7 (Ozon)</option>
+                        <option value="ashimbaeva">Ашимбаева 5 (Ozon)</option>
+                        <option value="akkozieva">Аккозиева 53 (Ozon)</option>
+                        <option value="abaya286">Абая 286 (Ozon)</option>
+                        <option value="murtazy">Муртазы 86 (Ozon)</option>
+                        <option value="atabaeva">Атабаева 105 (Ozon)</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="w-full bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap">
+                    Зарегистрироваться
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Обучающий раздел -->
+    <section id="education" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <div class="text-primary font-medium mb-2">ОБУЧЕНИЕ</div>
+                <h2 class="text-3xl font-bold text-gray-900">Как пользоваться нашим сервисом</h2>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Ознакомьтесь с нашими обучающими материалами, чтобы узнать, как эффективно использовать наш сервис доставки</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-200">
+                        <img src="https://readdy.ai/api/search-image?query=A%20person%20registering%20on%20a%20website%2C%20filling%20out%20a%20form%20on%20a%20computer%20screen%20with%20a%20logistics%20company%20interface%20visible.%20The%20screen%20shows%20registration%20fields%20for%20name%2C%20phone%20number%2C%20and%20pickup%20location%20selection.%20The%20image%20has%20a%20clean%2C%20professional%20look%20with%20soft%20lighting&width=600&height=400&seq=12346&orientation=landscape" alt="Регистрация на сайте" class="object-cover w-full h-full">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Регистрация на сайте</h3>
+                        <p class="text-gray-700 mb-4">Узнайте, как правильно заполнить форму регистрации и выбрать удобный пункт выдачи для получения ваших посылок.</p>
+                        <button class="inline-flex items-center text-primary font-medium hover:text-primary-dark transition">
+                            Смотреть видео
+                            <i class="ri-play-circle-line ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-200">
+                        <img src="https://readdy.ai/api/search-image?query=A%20person%20placing%20an%20order%20on%20a%20Chinese%20e-commerce%20website%2C%20with%20a%20shopping%20cart%20visible%20and%20product%20selections%20being%20made.%20The%20screen%20shows%20Chinese%20text%20and%20product%20listings.%20The%20image%20has%20a%20clean%2C%20professional%20look%20with%20soft%20lighting&width=600&height=400&seq=12347&orientation=landscape" alt="Оформление заказа" class="object-cover w-full h-full">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Оформление заказа в Китае</h3>
+                        <p class="text-gray-700 mb-4">Пошаговая инструкция по оформлению заказа на китайских торговых площадках и указанию нашего адреса доставки.</p>
+                        <button class="inline-flex items-center text-primary font-medium hover:text-primary-dark transition">
+                            Смотреть видео
+                            <i class="ri-play-circle-line ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-200">
+                        <img src="https://readdy.ai/api/search-image?query=A%20person%20tracking%20a%20package%20on%20a%20logistics%20tracking%20system%2C%20with%20a%20map%20showing%20the%20route%20from%20China%20to%20Kazakhstan.%20The%20screen%20displays%20tracking%20information%2C%20status%20updates%2C%20and%20estimated%20delivery%20dates.%20The%20image%20has%20a%20clean%2C%20professional%20look%20with%20soft%20lighting&width=600&height=400&seq=12348&orientation=landscape" alt="Отслеживание посылки" class="object-cover w-full h-full">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Отслеживание посылки</h3>
+                        <p class="text-gray-700 mb-4">Узнайте, как отслеживать статус вашей посылки на каждом этапе доставки из Китая в Казахстан.</p>
+                        <button class="inline-flex items-center text-primary font-medium hover:text-primary-dark transition">
+                            Смотреть видео
+                            <i class="ri-play-circle-line ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <a href="#" class="text-2xl font-['Pacifico'] text-white mb-4 inline-block">logo</a>
+                    <p class="text-gray-400 mb-6">Надежная доставка грузов из Китая в Казахстан по выгодным тарифам.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/inter_cargo_trz/" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="https://t.me/inter_cargo" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition">
+                            <i class="ri-telegram-line"></i>
+                        </a>
+                        <a href="https://wa.me/77066440624" class="w-10 h-10 flex items-center justify-center rounded-full bg-green-600 hover:bg-green-700 transition">
+                            <i class="ri-whatsapp-line"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Навигация</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Главная</a></li>
+                        <li><a href="#registration" class="text-gray-400 hover:text-white transition">Регистрация</a></li>
+                        <li><a href="#education" class="text-gray-400 hover:text-white transition">Обучение</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">О компании</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Пункты выдачи</h3>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400">Акбулак 21 (Ozon)</li>
+                        <li class="text-gray-400">Пушкина 8 (Ozon)</li>
+                        <li class="text-gray-400">Ташкентская 286 (Ozon)</li>
+                        <li class="text-gray-400">Абая 323 (Beer bochka)</li>
+                        <li><a href="#" class="text-primary hover:text-primary-light transition">Смотреть все пункты</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Контакты</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mt-1 mr-3">
+                                <i class="ri-map-pin-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-400">Республика Казахстан, Жамбылская обл., г. Тараз, мкр.Акбулак(1), д.21</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mt-1 mr-3">
+                                <i class="ri-phone-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-400">Директор: +7 (777) 977-36-96</span>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mt-1 mr-3">
+                                
+                            </div>
+                            <span class="text-gray-400">Менеджер: +7 (706) 664-06-24</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mt-1 mr-3">
+                                <i class="ri-mail-line text-primary"></i>
+                            </div>
+                            <span class="text-gray-400">info@cargo-kz.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 Inter Cargo. Все права защищены.</p>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500 text-sm">Способы оплаты:</span>
+                    <i class="ri-visa-fill text-xl text-gray-400"></i>
+                    <i class="ri-mastercard-fill text-xl text-gray-400"></i>
+                    <i class="ri-paypal-fill text-xl text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
