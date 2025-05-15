@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
-    	
-{% load static %}
+{% load static %}    	
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inter Cargo - доставка из Китая в Казахстан</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
     <script>tailwind.config={theme:{extend:{colors:{primary:'#e53e3e',secondary:'#4a5568'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,33 +17,9 @@
     <script src="{% static 'scripts/scripts.js' %}"></script>
 </head>
 <body class="bg-gray-50 min-h-screen">
-    <!-- Навигационная панель -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center">
-                <a href="#" class="text-2xl font-['Pacifico'] text-primary mr-8"><img src="{% static "images/logo.png" %}" style="height: 50px; width: 50px;"></a>
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#" class="text-gray-900 font-medium hover:text-primary transition">Главная</a>
-                    <a href="#registration" class="text-gray-700 hover:text-primary transition">Регистрация</a>
-                    <a href="education/" class="text-gray-700 hover:text-primary transition">Обучение</a>
-                </nav>
-            </div>
-            <div class="flex items-center space-x-4">
-                <a href="https://www.instagram.com/inter_cargo_trz/" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
-                    <i class="ri-instagram-line text-gray-700"></i>
-                </a>
-                <a href="https://t.me/inter_cargo" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
-                    <i class="ri-telegram-line text-gray-700"></i>
-                </a>
-                <a href="https://wa.me/77066440624" class="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 hover:bg-green-600 transition">
-                    <i class="ri-whatsapp-line text-white"></i>
-                </a>
-                <button class="md:hidden w-10 h-10 flex items-center justify-center">
-                    <i class="ri-menu-line text-xl"></i>
-                </button>
-            </div>
-        </div>
-    </header>
+{% include 'includes/header.html' %}
+
+    {% block content %}
 
     <!-- Hero секция с калькулятором -->
     <section class="relative py-16 md:py-24 overflow-hidden" style="background-image: url('https://readdy.ai/api/search-image?query=A%20world%20map%20with%20logistics%20routes%20highlighted%2C%20showing%20shipping%20connections%20between%20China%20and%20Kazakhstan.%20The%20map%20has%20a%20dark%20gray%20background%20with%20lighter%20gray%20continents%2C%20giving%20a%20professional%20and%20modern%20look.%20The%20map%20shows%20shipping%20routes%20with%20subtle%20red%20lines%20connecting%20China%20and%20Kazakhstan&width=1920&height=800&seq=12345&orientation=landscape'); background-size: cover; background-position: center;">
@@ -290,87 +267,8 @@
         </div>
     </section>
 
-    <!-- Футер -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div>
-                    <a href="#" class="text-2xl font-['Pacifico'] text-white mb-4 inline-block">logo</a>
-                    <p class="text-gray-400 mb-6">Надежная доставка грузов из Китая в Казахстан по выгодным тарифам.</p>
-                    <div class="flex space-x-4">
-                        <a href="https://www.instagram.com/inter_cargo_trz/" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition">
-                            <i class="ri-instagram-line"></i>
-                        </a>
-                        <a href="https://t.me/inter_cargo" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition">
-                            <i class="ri-telegram-line"></i>
-                        </a>
-                        <a href="https://wa.me/77066440624" class="w-10 h-10 flex items-center justify-center rounded-full bg-green-600 hover:bg-green-700 transition">
-                            <i class="ri-whatsapp-line"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Навигация</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Главная</a></li>
-                        <li><a href="#registration" class="text-gray-400 hover:text-white transition">Регистрация</a></li>
-                        <li><a href="#education" class="text-gray-400 hover:text-white transition">Обучение</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">О компании</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Пункты выдачи</h3>
-                    <ul class="space-y-2">
-                        <li class="text-gray-400">Акбулак 21 (Ozon)</li>
-                        <li class="text-gray-400">Пушкина 8 (Ozon)</li>
-                        <li class="text-gray-400">Ташкентская 286 (Ozon)</li>
-                        <li class="text-gray-400">Абая 323 (Beer bochka)</li>
-                        <li><a href="#" class="text-primary hover:text-primary-light transition">Смотреть все пункты</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Контакты</h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-start">
-                            <div class="w-5 h-5 flex items-center justify-center mt-1 mr-3">
-                                <i class="ri-map-pin-line text-primary"></i>
-                            </div>
-                            <span class="text-gray-400">Республика Казахстан, Жамбылская обл., г. Тараз, мкр.Акбулак(1), д.21</span>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="w-5 h-5 flex items-center justify-center mt-1 mr-3">
-                                <i class="ri-phone-line text-primary"></i>
-                            </div>
-                            <span class="text-gray-400">Директор: +7 (777) 977-36-96</span>
-                        <li class="flex items-start">
-                            <div class="w-5 h-5 flex items-center justify-center mt-1 mr-3">
-                                
-                            </div>
-                            <span class="text-gray-400">Менеджер: +7 (706) 664-06-24</span>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="w-5 h-5 flex items-center justify-center mt-1 mr-3">
-                                <i class="ri-mail-line text-primary"></i>
-                            </div>
-                            <span class="text-gray-400">info@cargo-kz.com</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 Inter Cargo. Все права защищены.</p>
-                <div class="flex items-center space-x-4">
-                    <span class="text-gray-500 text-sm">Способы оплаты:</span>
-                    <i class="ri-visa-fill text-xl text-gray-400"></i>
-                    <i class="ri-mastercard-fill text-xl text-gray-400"></i>
-                    <i class="ri-paypal-fill text-xl text-gray-400"></i>
-                </div>
-            </div>
-        </div>
-    </footer>
+    {% endblock %}
+
+{% include 'includes/footer.html' %}
 </body>
 </html>
