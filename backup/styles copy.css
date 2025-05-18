@@ -10,3 +10,18 @@
         input[type="number"] {
             -moz-appearance: textfield;
         }
+        .phone-input {
+            position: relative;
+        }
+        .phone-input input {
+            padding-left: 90px;
+        }
+        .phone-input::before {
+            content: "+7";
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1f2937;
+            font-weight: 500;
+        }
