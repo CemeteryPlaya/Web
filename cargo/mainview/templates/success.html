@@ -9,11 +9,10 @@
     <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
     <script>tailwind.config={theme:{extend:{colors:{primary:'#e53e3e',secondary:'#4a5568'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{% static 'styles/css2.css' %}"/>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'styles/styles.css' %}"/>
+    <link rel="stylesheet" href="{% static 'styles/remixicon/remixicon.css' %}"/>
     <script src="{% static 'scripts/scripts.js' %}"></script>
 </head>
 <body class="bg-gray-50 min-h-screen">
@@ -28,12 +27,18 @@
                 <div class="text-primary font-medium mb-2">Спасибо за регистрацию, можете сейчас ознакомиться с тем как устроен наш сервис</div>
                 <h2 class="text-3xl font-bold text-gray-900">Как пользоваться нашим сервисом</h2>
                 <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Ознакомьтесь с нашими обучающими материалами, чтобы узнать, как эффективно использовать наш сервис доставки</p>
+                
+            </div>
+            <div class="text-center mb-12">
+                <a href="/login/"><button type="submit" style="width: 400px;" class="w-full bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition whitespace-nowrap mx-auto">
+                    Войти в аккаунт
+                </button></a>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
                     <div class="aspect-w-16 aspect-h-9 bg-gray-200">
-                        <img src="https://readdy.ai/api/search-image?query=A%20person%20registering%20on%20a%20website%2C%20filling%20out%20a%20form%20on%20a%20computer%20screen%20with%20a%20logistics%20company%20interface%20visible.%20The%20screen%20shows%20registration%20fields%20for%20name%2C%20phone%20number%2C%20and%20pickup%20location%20selection.%20The%20image%20has%20a%20clean%2C%20professional%20look%20with%20soft%20lighting&width=600&height=400&seq=12346&orientation=landscape" alt="Регистрация на сайте" class="object-cover w-full h-full">
+                        <img src="{% static 'images/edu1.jpg' %}" alt="Регистрация на сайте" class="object-cover w-full h-full">
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Регистрация на сайте</h3>
@@ -47,7 +52,7 @@
                 
                 <div class="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
                     <div class="aspect-w-16 aspect-h-9 bg-gray-200">
-                        <img src="https://readdy.ai/api/search-image?query=A%20person%20placing%20an%20order%20on%20a%20Chinese%20e-commerce%20website%2C%20with%20a%20shopping%20cart%20visible%20and%20product%20selections%20being%20made.%20The%20screen%20shows%20Chinese%20text%20and%20product%20listings.%20The%20image%20has%20a%20clean%2C%20professional%20look%20with%20soft%20lighting&width=600&height=400&seq=12347&orientation=landscape" alt="Оформление заказа" class="object-cover w-full h-full">
+                        <img src="{% static 'images/edu2.jpg' %}" alt="Оформление заказа" class="object-cover w-full h-full">
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Оформление заказа в Китае</h3>
@@ -61,7 +66,7 @@
                 
                 <div class="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
                     <div class="aspect-w-16 aspect-h-9 bg-gray-200">
-                        <img src="https://readdy.ai/api/search-image?query=A%20person%20tracking%20a%20package%20on%20a%20logistics%20tracking%20system%2C%20with%20a%20map%20showing%20the%20route%20from%20China%20to%20Kazakhstan.%20The%20screen%20displays%20tracking%20information%2C%20status%20updates%2C%20and%20estimated%20delivery%20dates.%20The%20image%20has%20a%20clean%2C%20professional%20look%20with%20soft%20lighting&width=600&height=400&seq=12348&orientation=landscape" alt="Отслеживание посылки" class="object-cover w-full h-full">
+                        <img src="{% static 'images/edu3.jpg' %}" alt="Отслеживание посылки" class="object-cover w-full h-full">
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Отслеживание посылки</h3>
