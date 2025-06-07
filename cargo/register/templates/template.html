@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% load static %}    	
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inter Cargo - доставка из Китая в Казахстан</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#e53e3e',secondary:'#4a5568'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="stylesheet" href="{% static 'styles/css2.css' %}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}"/>
+    <link rel="stylesheet" href="{% static 'styles/remixicon/remixicon.css' %}"/>
+    <script src="{% static 'scripts/scripts.js' %}"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+{% include 'includes/header.html' %}
+
+    {% block content %}
+
+    
+
+    {% endblock %}
+
+{% include 'includes/footer.html' %}
+</body>
+</html>

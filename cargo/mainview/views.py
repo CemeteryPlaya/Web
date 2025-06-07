@@ -90,7 +90,7 @@ def login_view(request):
         if check_password(password, user.password):
             # Авторизация успешна
             request.session['user_id'] = user.id  # например, сохраняем ID пользователя в сессии
-            return redirect('dashboard')  # перенаправление на защищённую страницу
+            return redirect('profile')  # перенаправление на защищённую страницу
         else:
             return render(request, 'login.html', {
                 'error': 'Неверный логин или пароль'

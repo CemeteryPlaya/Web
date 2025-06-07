@@ -97,3 +97,6 @@ def success_view(request):
 
 def registartion(request):
     return render(request, "registration.html")
+
+def profile(request):
+    return render(request, "profile.html")

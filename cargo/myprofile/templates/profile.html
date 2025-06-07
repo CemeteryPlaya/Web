@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% load static %}    	
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inter Cargo - доставка из Китая в Казахстан</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#e53e3e',secondary:'#4a5568'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="stylesheet" href="{% static 'styles/css2.css' %}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}"/>
+    <link rel="stylesheet" href="{% static 'styles/remixicon/remixicon.css' %}"/>
+    <script src="{% static 'scripts/scripts.js' %}"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen">
+{% include 'includes/header.html' %}
+
+    {% block content %}
+
+      <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 p-6 hidden md:block shadow-sm sticky top-0 h-screen">
+      <h1 class="text-2xl font-bold text-red-500 mb-8">Cargo</h1>
+      <nav class="space-y-4 text-gray-700">
+        <a href="#messages" class="flex items-center gap-2 hover:text-red-500"><i class="ri-mail-line"></i> Сообщения</a>
+        <a href="#trackcodes" class="flex items-center gap-2 hover:text-red-500"><i class="ri-barcode-line"></i> Трек-коды</a>
+        <a href="#wallet" class="flex items-center gap-2 hover:text-red-500"><i class="ri-wallet-3-line"></i> Кошелек</a>
+        <a href="#news" class="flex items-center gap-2 hover:text-red-500"><i class="ri-news-line"></i> Новости</a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="flex-1 px-4 md:px-8 py-8 space-y-10">
+      <!-- Header (for mobile) -->
+      <header class="md:hidden mb-6">
+        <h1 class="text-xl font-bold text-red-500">Личный кабинет</h1>
+      </header>
+
+      <!-- Messages Section -->
+      <section id="messages">
+        <h2 class="text-xl font-semibold mb-4"><i class="ri-mail-line text-red-500"></i> Сообщения</h2>
+        <ul class="space-y-3">
+          <li class="bg-white p-4 rounded-lg shadow border border-gray-200">Уведомление о доставке №12345 было успешно завершено.</li>
+          <li class="bg-white p-4 rounded-lg shadow border border-gray-200">Ваш заказ находится на таможенной проверке.</li>
+        </ul>
+      </section>
+
+      <!-- Track Codes Section -->
+      <section id="trackcodes">
+        <h2 class="text-xl font-semibold mb-4"><i class="ri-barcode-line text-red-500"></i> Трек-коды</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-white p-4 rounded-lg shadow border border-gray-200">
+            <p><strong>Код:</strong> RU123456789CN</p>
+            <p><strong>Статус:</strong> В пути</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow border border-gray-200">
+            <p><strong>Код:</strong> US987654321RU</p>
+            <p><strong>Статус:</strong> Доставлено</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Wallet Section -->
+      <section id="wallet">
+        <h2 class="text-xl font-semibold mb-4"><i class="ri-wallet-3-line text-red-500"></i> Кошелек</h2>
+        <div class="bg-white p-4 rounded-lg shadow border border-gray-200 mb-4">
+          <p><strong>Текущий баланс:</strong> <span class="text-green-600">1 250₽</span></p>
+        </div>
+        <div class="space-y-2">
+          <div class="bg-white p-3 rounded shadow border border-gray-200">+500₽ — Пополнение (01.06.2025)</div>
+          <div class="bg-white p-3 rounded shadow border border-gray-200">−250₽ — Оплата доставки (02.06.2025)</div>
+        </div>
+      </section>
+
+      <!-- News Section -->
+      <section id="news">
+        <h2 class="text-xl font-semibold mb-4"><i class="ri-news-line text-red-500"></i> Новости</h2>
+        <article class="bg-white p-4 rounded-lg shadow border border-gray-200 mb-4">
+          <h3 class="font-bold mb-2 text-gray-800">Обновление тарифов на доставку</h3>
+          <p>С 15 июня вступают в силу новые тарифы для международных перевозок...</p>
+        </article>
+        <article class="bg-white p-4 rounded-lg shadow border border-gray-200">
+          <h3 class="font-bold mb-2 text-gray-800">Новая функция отслеживания</h3>
+          <p>Теперь вы можете видеть полную историю движения вашей посылки в реальном времени!</p>
+        </article>
+      </section>
+    </main>
+  </div>
+
+    {% endblock %}
+
+{% include 'includes/footer.html' %}
+</body>
+</html>
