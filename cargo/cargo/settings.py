@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'mainview',
     'myprofile',
     'register',
@@ -124,3 +125,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SESSION_COOKIE_SECURE = False
+
+SESSION_COOKIE_HTTPONLY = True
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+LOGIN_URL = '/auth/login/'
+
+LOGIN_REDIRECT_URL = '/profile/'
+
+LOGOUT_REDIRECT_URL = '/'

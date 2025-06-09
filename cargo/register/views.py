@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import Registration
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.hashers import check_password
+from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from .models import UserProfile
+
 
 # Create your views here.
 def pre_register(request):
@@ -24,7 +27,7 @@ def pre_register(request):
             'phone': phone,
             'pickup': pickup
         }
-        return redirect('continue_register')  # это URL для registration.html
+        return redirect('continue_register')
 
     return render(request, 'index.html')
 
@@ -41,62 +44,49 @@ def continue_register(request):
 
 def register_view(request):
     if request.method == 'POST':
-        login = request.POST.get('login')
+        username = request.POST.get('login')
+        password = request.POST.get('password')
         phone = request.POST.get('phone')
         pickup = request.POST.get('pickup')
-        password = request.POST.get('password')
 
-        if all([login, phone, pickup, password]):
-            hashed_password = make_password(password)
+        if not all([username, password, phone, pickup]):
+            messages.error(request, "Заполните все поля.")
+            return render(request, 'registration.html')
 
-            Registration.objects.create(
-                login=login,
-                phone=phone,
-                pickup=pickup,
-                password=hashed_password  # сохраняем хеш
-            )
-            request.session.pop('registration_data', None)
-            return redirect('success')
-        else:
-            return render(request, 'registration.html', {
-                'login': login,
-                'phone': phone,
-                'pickup': pickup,
-                'error': 'Заполните все поля корректно.'
-            })
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Пользователь с таким логином уже существует.")
+            return render(request, 'registration.html')
 
-    return redirect('register')
+        user = User.objects.create_user(username=username, password=password)
+        UserProfile.objects.create(user=user, phone=phone, pickup=pickup)
+
+        messages.success(request, "Регистрация прошла успешно. Выполните вход.")
+        return redirect('login')
+
+    return render(request, 'registration.html')
 
 def login_view(request):
     if request.method == 'POST':
-        login = request.POST.get('login')
+        username = request.POST.get('login')
         password = request.POST.get('password')
 
-        # Найти пользователя по логину
-        try:
-            user = Registration.objects.get(login=login)
-        except Registration.DoesNotExist:
-            return render(request, 'login.html', {
-                'error': 'Неверный логин или пароль'
-            })
+        user = authenticate(request, username=username, password=password)
 
-        # Проверить хешированный пароль
-        if check_password(password, user.password):
-            # Авторизация успешна
-            request.session['user_id'] = user.id  # например, сохраняем ID пользователя в сессии
-            return redirect('dashboard')  # перенаправление на защищённую страницу
+        if user is not None:
+            login(request, user)
+            return redirect('profile')
         else:
-            return render(request, 'login.html', {
-                'error': 'Неверный логин или пароль'
-            })
+            messages.error(request, "Неверный логин или пароль.")
+            return render(request, 'login.html')
 
     return render(request, 'login.html')
 
 def success_view(request):
     return render(request, 'success.html')
 
-def registartion(request):
+def registration(request):
     return render(request, "registration.html")
 
-def profile(request):
-    return render(request, "profile.html")
+def logout_view(request):
+    logout(request)
+    return redirect('home')

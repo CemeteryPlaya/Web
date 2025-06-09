@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-{% load static %}    	
+{% load static %}
 
 <head>
     <meta charset="UTF-8">
@@ -18,79 +18,90 @@
 <body class="bg-gray-50 text-gray-900 min-h-screen">
 {% include 'includes/header.html' %}
 
-    {% block content %}
-
-      <div class="flex min-h-screen">
+{% block content %}
+<div class="flex min-h-screen">
     <!-- Sidebar -->
-    <aside class="w-64 bg-white border-r border-gray-200 p-6 hidden md:block shadow-sm sticky top-0 h-screen">
-      <h1 class="text-2xl font-bold text-red-500 mb-8">Cargo</h1>
-      <nav class="space-y-4 text-gray-700">
-        <a href="#messages" class="flex items-center gap-2 hover:text-red-500"><i class="ri-mail-line"></i> Сообщения</a>
-        <a href="#trackcodes" class="flex items-center gap-2 hover:text-red-500"><i class="ri-barcode-line"></i> Трек-коды</a>
-        <a href="#wallet" class="flex items-center gap-2 hover:text-red-500"><i class="ri-wallet-3-line"></i> Кошелек</a>
-        <a href="#news" class="flex items-center gap-2 hover:text-red-500"><i class="ri-news-line"></i> Новости</a>
-      </nav>
+    <aside class="w-64 bg-white border-r border-gray-200 p-6 hidden md:flex flex-col justify-between shadow-sm sticky top-0 h-screen">
+        <div>
+            <h1 class="text-2xl font-bold text-red-500 mb-8">Cargo</h1>
+            <nav class="space-y-4 text-gray-700">
+                <a href="#messages" class="flex items-center gap-2 hover:text-red-500"><i class="ri-mail-line"></i> Сообщения</a>
+                <a href="{% url 'track_codes' %}" class="flex items-center gap-2 hover:text-red-500"><i class="ri-barcode-line"></i> Трек-коды</a>
+                <a href="#wallet" class="flex items-center gap-2 hover:text-red-500"><i class="ri-wallet-3-line"></i> Кошелек</a>
+                <a href="#news" class="flex items-center gap-2 hover:text-red-500"><i class="ri-news-line"></i> Новости</a>
+            </nav>
+        </div>
     </aside>
 
     <!-- Main content -->
     <main class="flex-1 px-4 md:px-8 py-8 space-y-10">
-      <!-- Header (for mobile) -->
-      <header class="md:hidden mb-6">
-        <h1 class="text-xl font-bold text-red-500">Личный кабинет</h1>
-      </header>
+        <!-- Header (for mobile) -->
+        <header class="md:hidden mb-6">
+            <h1 class="text-xl font-bold text-red-500">Личный кабинет</h1>
+        </header>
 
-      <!-- Messages Section -->
-      <section id="messages">
-        <h2 class="text-xl font-semibold mb-4"><i class="ri-mail-line text-red-500"></i> Сообщения</h2>
-        <ul class="space-y-3">
-          <li class="bg-white p-4 rounded-lg shadow border border-gray-200">Уведомление о доставке №12345 было успешно завершено.</li>
-          <li class="bg-white p-4 rounded-lg shadow border border-gray-200">Ваш заказ находится на таможенной проверке.</li>
-        </ul>
-      </section>
+        <!-- User Info -->
+        <section id="user-info" class="bg-white p-6 rounded-lg shadow border border-gray-200 mb-6">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800"><i class="ri-user-3-line text-red-500"></i> Информация о пользователе</h2>
+            <p><strong>Имя пользователя:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            {% if user.userprofile %}
+                <p><strong>Телефон:</strong> {{ user.userprofile.phone }}</p>
+                <p><strong>Пункт выдачи:</strong> {{ user.userprofile.pickup }}</p>
+            {% endif %}
+        </section>
 
-      <!-- Track Codes Section -->
-      <section id="trackcodes">
-        <h2 class="text-xl font-semibold mb-4"><i class="ri-barcode-line text-red-500"></i> Трек-коды</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="bg-white p-4 rounded-lg shadow border border-gray-200">
-            <p><strong>Код:</strong> RU123456789CN</p>
-            <p><strong>Статус:</strong> В пути</p>
-          </div>
-          <div class="bg-white p-4 rounded-lg shadow border border-gray-200">
-            <p><strong>Код:</strong> US987654321RU</p>
-            <p><strong>Статус:</strong> Доставлено</p>
-          </div>
-        </div>
-      </section>
+        <!-- Messages Section -->
+        <section id="messages">
+            <h2 class="text-xl font-semibold mb-4"><i class="ri-mail-line text-red-500"></i> Сообщения</h2>
+            <ul class="space-y-3">
+                <li class="bg-white p-4 rounded-lg shadow border border-gray-200">Уведомление о доставке №12345 было успешно завершено.</li>
+                <li class="bg-white p-4 rounded-lg shadow border border-gray-200">Ваш заказ находится на таможенной проверке.</li>
+            </ul>
+        </section>
 
-      <!-- Wallet Section -->
-      <section id="wallet">
-        <h2 class="text-xl font-semibold mb-4"><i class="ri-wallet-3-line text-red-500"></i> Кошелек</h2>
-        <div class="bg-white p-4 rounded-lg shadow border border-gray-200 mb-4">
-          <p><strong>Текущий баланс:</strong> <span class="text-green-600">1 250₽</span></p>
-        </div>
-        <div class="space-y-2">
-          <div class="bg-white p-3 rounded shadow border border-gray-200">+500₽ — Пополнение (01.06.2025)</div>
-          <div class="bg-white p-3 rounded shadow border border-gray-200">−250₽ — Оплата доставки (02.06.2025)</div>
-        </div>
-      </section>
+        <!-- Track Codes Section -->
+        <section id="trackcodes">
+            <h2 class="text-xl font-semibold mb-4"><i class="ri-barcode-line text-red-500"></i> Трек-коды</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-lg shadow border border-gray-200">
+                    <p><strong>Код:</strong> RU123456789CN</p>
+                    <p><strong>Статус:</strong> В пути</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow border border-gray-200">
+                    <p><strong>Код:</strong> US987654321RU</p>
+                    <p><strong>Статус:</strong> Доставлено</p>
+                </div>
+            </div>
+        </section>
 
-      <!-- News Section -->
-      <section id="news">
-        <h2 class="text-xl font-semibold mb-4"><i class="ri-news-line text-red-500"></i> Новости</h2>
-        <article class="bg-white p-4 rounded-lg shadow border border-gray-200 mb-4">
-          <h3 class="font-bold mb-2 text-gray-800">Обновление тарифов на доставку</h3>
-          <p>С 15 июня вступают в силу новые тарифы для международных перевозок...</p>
-        </article>
-        <article class="bg-white p-4 rounded-lg shadow border border-gray-200">
-          <h3 class="font-bold mb-2 text-gray-800">Новая функция отслеживания</h3>
-          <p>Теперь вы можете видеть полную историю движения вашей посылки в реальном времени!</p>
-        </article>
-      </section>
+        <!-- Wallet Section -->
+        <section id="wallet">
+            <h2 class="text-xl font-semibold mb-4"><i class="ri-wallet-3-line text-red-500"></i> Кошелек</h2>
+            <div class="bg-white p-4 rounded-lg shadow border border-gray-200 mb-4">
+                <p><strong>Текущий баланс:</strong> <span class="text-green-600">1 250₽</span></p>
+            </div>
+            <div class="space-y-2">
+                <div class="bg-white p-3 rounded shadow border border-gray-200">+500₽ — Пополнение (01.06.2025)</div>
+                <div class="bg-white p-3 rounded shadow border border-gray-200">−250₽ — Оплата доставки (02.06.2025)</div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section id="news">
+            <h2 class="text-xl font-semibold mb-4"><i class="ri-news-line text-red-500"></i> Новости</h2>
+            <article class="bg-white p-4 rounded-lg shadow border border-gray-200 mb-4">
+                <h3 class="font-bold mb-2 text-gray-800">Обновление тарифов на доставку</h3>
+                <p>С 15 июня вступают в силу новые тарифы для международных перевозок...</p>
+            </article>
+            <article class="bg-white p-4 rounded-lg shadow border border-gray-200">
+                <h3 class="font-bold mb-2 text-gray-800">Новая функция отслеживания</h3>
+                <p>Теперь вы можете видеть полную историю движения вашей посылки в реальном времени!</p>
+            </article>
+        </section>
     </main>
-  </div>
-
-    {% endblock %}
+</div>
+{% endblock %}
 
 {% include 'includes/footer.html' %}
 </body>
