@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% load static %}    	
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inter Cargo - доставка из Китая в Казахстан</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#e53e3e',secondary:'#4a5568'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="stylesheet" href="{% static 'styles/css2.css' %}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}"/>
+    <link rel="stylesheet" href="{% static 'styles/remixicon/remixicon.css' %}"/>
+    <script src="{% static 'scripts/scripts.js' %}"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+{% include 'includes/header.html' %}
+
+    {% block content %}
+
+    <!-- Раздел о компании -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <div class="text-primary text-3xl font-bold mb-2">О компании INTER CARGO</div>
+                <h2 class="text-2xl font-semibold text-gray-900">История и инфо</h2>
+            </div>
+                <section id="about-company" class="bg-white p-6 rounded-lg shadow border border-gray-200 mb-6">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-800">История появления:</h2>
+                    <p>INTER CARGO LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM </p>
+                </section>
+            <div class="max-w-3xl mx-auto">
+                <div class="space-y-4">
+                    <div class="border border-gray-200 rounded">
+                        <button class="faq-toggle flex justify-between items-center w-full px-6 py-4 text-left font-medium text-gray-900 hover:bg-gray-50 transition" data-target="faq1">
+                            <span>Как рассчитывается стоимость доставки?</span>
+                            <i class="ri-arrow-down-s-line text-xl"></i>
+                        </button>
+                        <div id="faq1" class="faq-content hidden px-6 pb-4">
+                            <p class="text-gray-700">Стоимость доставки рассчитывается по тарифу 1859₸ за килограмм груза. Минимальный вес для расчета - 0 кг, максимальный - 100 кг (Выше 100 кг. необходимо связаться с менеджером). Для расчета используйте калькулятор на нашем сайте.</p>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded">
+                        <button class="faq-toggle flex justify-between items-center w-full px-6 py-4 text-left font-medium text-gray-900 hover:bg-gray-50 transition" data-target="faq2">
+                            <span>Какие сроки доставки из Китая в Казахстан?</span>
+                            <i class="ri-arrow-down-s-line text-xl"></i>
+                        </button>
+                        <div id="faq2" class="faq-content hidden px-6 pb-4">
+                            <p class="text-gray-700">Средний срок доставки составляет 8-12 дней с момента отправки товара с нашего склада в Китае. Сроки могут варьироваться в зависимости от сезона и загруженности таможенных служб.</p>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded">
+                        <button class="faq-toggle flex justify-between items-center w-full px-6 py-4 text-left font-medium text-gray-900 hover:bg-gray-50 transition" data-target="faq3">
+                            <span>Как зарегистрироваться в системе?</span>
+                            <i class="ri-arrow-down-s-line text-xl"></i>
+                        </button>
+                        <div id="faq3" class="faq-content hidden px-6 pb-4">
+                            <p class="text-gray-700">Для регистрации необходимо заполнить форму на странице "Регистрация", указав свой логин (имя/ник + последние 4 цифры телефона), номер телефона и выбрав удобный пункт выдачи. После регистрации можете авторизоваться в личном кабинете нажав на кнопку, либо на инонку профиля в верхней части.</p>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded">
+                        <button class="faq-toggle flex justify-between items-center w-full px-6 py-4 text-left font-medium text-gray-900 hover:bg-gray-50 transition" data-target="faq4">
+                            <span>Какие товары запрещены к перевозке?</span>
+                            <i class="ri-arrow-down-s-line text-xl"></i>
+                        </button>
+                        <div id="faq4" class="faq-content hidden px-6 pb-4 text-gray-700">
+                            <p>К перевозке запрещены: <li>Взрывоопасные, радиоактивные, горючие, инфекционные, ядовитые вещества.</li> 
+                                                                            <li>Холодные оружия, включая макеты, пневматику, арбалеты и др.</li> 
+                                                                            <li>Скоропортящиеся и жидкие продукты (за исключением сухих и продуктов в вакуумных упаковках).</li> 
+                                                                            <li>Техника, мобильные телефоны, ноутбуки. Хрупкие, стеклянные товары (либо просите продавца надежную упаковку, пузыочатую пленку, защиту края и т.д.)</li></p>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded">
+                        <button class="faq-toggle flex justify-between items-center w-full px-6 py-4 text-left font-medium text-gray-900 hover:bg-gray-50 transition" data-target="faq5">
+                            <span>Как отследить мой заказ?</span>
+                            <i class="ri-arrow-down-s-line text-xl"></i>
+                        </button>
+                        <div id="faq5" class="faq-content hidden px-6 pb-4">
+                            <p class="text-gray-700">После оформления заказа вам будет предоставлен трек-номер для отслеживания. Вы можете использовать его на нашем сайте или связаться с менеджером через WhatsApp для получения актуальной информации о статусе вашего груза.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <div class="text-primary font-medium mb-2">ОБУЧЕНИЕ</div>
+                <h2 class="text-3xl font-bold text-gray-900">Как пользоваться нашим сервисом</h2>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Ознакомьтесь с нашими обучающими материалами, чтобы узнать, как эффективно использовать наш сервис доставки</p>
+            </div>        
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-200">
+                        <img src="{% static 'images/edu1.jpg' %}" alt="Регистрация на сайте" class="object-cover w-full h-full">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Регистрация на сайте</h3>
+                        <p class="text-gray-700 mb-4">Узнайте, как правильно заполнить форму регистрации и выбрать удобный пункт выдачи для получения ваших посылок.</p>
+                        <a href="#"><button class="inline-flex items-center text-primary font-medium hover:text-primary-dark transition">
+                            Смотреть видео
+                            <i class="ri-play-circle-line ml-2"></i>
+                        </button></a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-200">
+                        <img src="{% static 'images/edu2.jpg' %}" alt="Оформление заказа" class="object-cover w-full h-full">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Оформление заказа в Китае</h3>
+                        <p class="text-gray-700 mb-4">Пошаговая инструкция по оформлению заказа на китайских торговых площадках и указанию нашего адреса доставки.</p>
+                        <a href="#"><button class="inline-flex items-center text-primary font-medium hover:text-primary-dark transition">
+                            Смотреть видео
+                            <i class="ri-play-circle-line ml-2"></i>
+                        </button></a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-200">
+                        <img src="{% static 'images/edu3.jpg' %}" alt="Отслеживание посылки" class="object-cover w-full h-full">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Отслеживание посылки</h3>
+                        <p class="text-gray-700 mb-4">Узнайте, как отслеживать статус вашей посылки на каждом этапе доставки из Китая в Казахстан.</p>
+                        <a href="#"><button class="inline-flex items-center text-primary font-medium hover:text-primary-dark transition">
+                            Смотреть видео
+                            <i class="ri-play-circle-line ml-2"></i>
+                        </button></a>
+                        <a href="https://luckytrack.kz/"><button class="inline-flex items-center text-primary font-medium hover:text-primary-dark transition" style="margin-left: 20px; color: rgb(41, 158, 66);">
+                            Перейти на LuckyTrack
+                        </button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% endblock %}
+
+{% include 'includes/footer.html' %}
+</body>
+</html>
