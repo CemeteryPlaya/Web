@@ -23,7 +23,8 @@ urlpatterns = [
     path('settings/', views.settings, name='settings'),
     path('update/', views.update_profile, name='update_profile'),
     path('', views.profile, name='profile'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout')
+    path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
+    path('delivered-posts/', views.delivered_trackcodes_by_date, name='delivered_posts'),
 ]
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

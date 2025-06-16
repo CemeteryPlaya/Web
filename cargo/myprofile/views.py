@@ -3,8 +3,10 @@ from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django import forms
+from collections import defaultdict
 from .models import TrackCode
 from register.models import UserProfile
+from decimal import Decimal
 
 # Create your views here.
 @login_required(login_url='login')
@@ -15,10 +17,8 @@ def profile(request):
     except UserProfile.DoesNotExist:
         profile = None
 
-    # Последние 2 трек-кода пользователя
     last_two_codes = TrackCode.objects.filter(owner=user).order_by('-update_date')[:2]
 
-    # Количество трек-кодов в статусе 'shipped_cn'
     user_added_count = TrackCode.objects.filter(owner=user, status='user_added').count()
     warehouse_cn_count = TrackCode.objects.filter(owner=user, status='warehouse_cn').count()
     shipped_cn_count = TrackCode.objects.filter(owner=user, status='shipped_cn').count()
@@ -113,12 +113,10 @@ def update_profile(request):
     phone = request.POST.get('phone')
     pickup = request.POST.get('pickup')
 
-    # Обновляем email пользователя
     if email:
         user.email = email
         user.save()
 
-    # Обновляем или создаём профиль пользователя
     try:
         profile = user.userprofile
     except UserProfile.DoesNotExist:
@@ -132,3 +130,25 @@ def update_profile(request):
 
     messages.success(request, "Профиль успешно обновлен.")
     return redirect('profile')
+
+@login_required
+def delivered_trackcodes_by_date(request):
+    delivered = TrackCode.objects.filter(owner=request.user, status='delivered')
+    grouped = defaultdict(list)
+
+    for track in delivered:
+        price = (track.weight or Decimal("0")) * Decimal("1859")
+        track.price = round(price, 2)  # Добавляем поле вручную
+        grouped[track.update_date].append(track)
+
+    result = {}
+    for date, tracks in sorted(grouped.items(), reverse=True):
+        total_weight = sum(t.weight or Decimal("0") for t in tracks)
+        total_price = sum(t.price for t in tracks)
+        result[date] = {
+            'tracks': tracks,
+            'total_weight': round(total_weight, 2),
+            'total_price': round(total_price, 2)
+        }
+
+    return render(request, 'delivered_posts.html', {'grouped_trackcodes': result})

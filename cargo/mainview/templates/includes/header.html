@@ -12,23 +12,17 @@
             </nav>
         </div>
         <div class="flex items-center space-x-4">
-            <a href="https://www.instagram.com/inter_cargo_trz/"
-               class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
+            <a href="https://www.instagram.com/inter_cargo_trz/" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
                 <i class="ri-instagram-line text-gray-700"></i>
             </a>
-            <a href="https://t.me/inter_cargo"
-               class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
+            <a href="https://t.me/inter_cargo" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
                 <i class="ri-telegram-line text-gray-700"></i>
             </a>
-            <a href="https://wa.me/77066440624"
-               class="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 hover:bg-green-600 transition">
+            <a href="https://wa.me/77066440624" class="w-10 h-10 flex items-center justify-center rounded-full bg-green-500 hover:bg-green-600 transition">
                 <i class="ri-whatsapp-line text-white"></i>
             </a>
-
             {% if user.is_authenticated %}
-                <a href="{% url 'profile' %}"
-                   class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-500 hover:bg-black transition"
-                   title="Профиль">
+                <a href="{% url 'profile' %}" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-500 hover:bg-black transition" title="Профиль">
                     <i class="ri-user-fill text-white"></i>
                 </a>
                 <form method="post" action="{% url 'logout' %}" style="display: inline;">
@@ -38,12 +32,9 @@
                     </button>
                 </form>
             {% else %}
-                <a href="{% url 'login' %}"
-                   class="text-sm text-gray-700 hover:text-primary transition">Войти</a>
-                <a href="{% url 'register' %}"
-                   class="text-sm text-gray-700 hover:text-primary transition">Регистрация</a>
+                <a href="{% url 'login' %}" class="text-sm text-gray-700 hover:text-primary transition">Войти</a>
+                <a href="{% url 'register' %}" class="text-sm text-gray-700 hover:text-primary transition">Регистрация</a>
             {% endif %}
-
             <button class="md:hidden w-10 h-10 flex items-center justify-center">
                 <i class="ri-menu-line text-xl"></i>
             </button>
