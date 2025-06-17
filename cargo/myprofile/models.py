@@ -21,7 +21,24 @@ class TrackCode(models.Model):
         verbose_name="Имя владельца"
     )
     description = models.CharField(max_length=255, blank=True, verbose_name="О посылке")
-    weight = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True, verbose_name="Вес посылки (кг)")
+    weight = models.DecimalField(max_digits=6, decimal_places=3, null=True, blank=True, verbose_name="Вес посылки (кг)")
 
     def __str__(self):
         return f"{self.track_code} - {self.get_status_display()}"
+    
+class Receipt(models.Model):
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Владелец")
+    created_at = models.DateField(auto_now_add=True, verbose_name="Дата создания")
+    is_paid = models.BooleanField(default=False, verbose_name="Статус оплаты")
+    total_weight = models.DecimalField(max_digits=6, decimal_places=3, default=0, verbose_name="Общий вес (кг)")
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="Сумма чека")
+
+    def __str__(self):
+        return f"Чек #{self.id} от {self.created_at} — {'Оплачен' if self.is_paid else 'Не оплачен'}"
+
+class ReceiptItem(models.Model):
+    receipt = models.ForeignKey(Receipt, related_name='items', on_delete=models.CASCADE)
+    track_code = models.OneToOneField(TrackCode, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.track_code)

@@ -21,17 +21,7 @@
 {% block content %}
 <div class="flex min-h-screen">
     <!-- Sidebar -->
-    <aside class="w-64 bg-white border-r border-gray-200 p-6 hidden md:block shadow-sm sticky top-0 h-screen">
-        <a href="{% url 'profile' %}"><h1 class="text-2xl font-bold text-red-500 mb-8">Меню</h1></a>
-        <nav class="space-y-4 text-gray-700">
-            <a href="#messages" class="flex items-center gap-2 hover:text-red-500"><i class="ri-mail-line"></i> Сообщения</a>
-            <a href="{% url 'track_codes' %}" class="flex items-center gap-2 hover:text-red-500"><i class="ri-barcode-line"></i> Трек-коды</a>
-            <a href="{% url 'delivered_posts' %}" class="flex items-center gap-2 hover:text-red-500"><i class="ri-bill-line"></i> Чеки</a>
-            <a href="#wallet" class="flex items-center gap-2 hover:text-red-500"><i class="ri-wallet-3-line"></i> Кошелек</a>
-            <a href="#news" class="flex items-center gap-2 hover:text-red-500"><i class="ri-news-line"></i> Новости</a>
-            <a href="{% url 'settings' %}" class="flex items-center gap-2 hover:text-red-500"><i class="ri-settings-line"></i> Настройки</a>
-        </nav>
-    </aside>
+    {% include 'includes/sidebar.html' %}
 
     <!-- Main content -->
     <main class="flex-1 px-4 md:px-8 py-8 space-y-10">

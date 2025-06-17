@@ -25,6 +25,8 @@ urlpatterns = [
     path('', views.profile, name='profile'),
     path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
     path('delivered-posts/', views.delivered_trackcodes_by_date, name='delivered_posts'),
+    path('receipts/', views.receipt_list, name='receipt_list'),
+    path('generate-receipt/', views.generate_daily_receipt, name='generate_receipt'),
 ]
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
