@@ -27,6 +27,8 @@ urlpatterns = [
     path('delivered-posts/', views.delivered_trackcodes_by_date, name='delivered_posts'),
     path('receipts/', views.receipt_list, name='receipt_list'),
     path('generate-receipt/', views.generate_daily_receipt, name='generate_receipt'),
+    path('pay-receipt/<int:receipt_id>/', views.pay_receipt, name='pay_receipt'),
+    path('update_tracks/', views.update_tracks, name='update_tracks'),
 ]
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

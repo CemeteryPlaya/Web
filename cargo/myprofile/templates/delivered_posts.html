@@ -30,7 +30,7 @@
       <h1 class="text-2xl font-bold mb-6 ml-2">Доставленные заказы</h1>
 
       {% for date, data in grouped_trackcodes.items %}
-          <div x-data="{ open: false }" class="border rounded-lg shadow mb-4 w-full">
+        <div x-data="{ open: false }" class="border rounded-lg shadow mb-4 w-full">
               <!-- Заголовок блока -->
               <div @click="open = !open" class="flex items-center justify-between px-4 py-3 cursor-pointer bg-gray-100 hover:bg-gray-200 transition">
                   <span class="font-semibold text-lg">{{ date|date:"d.m.Y" }}</span>
@@ -77,41 +77,72 @@
           <hr class="my-6">
           <h2 class="text-xl font-bold mb-4 ml-2">Сформированные чеки</h2>
 
-          {% if receipts %}
+          <div x-data="{ filter: 'all' }" class="mb-4 ml-2">
+            <label class="mr-2 font-medium">Фильтр:</label>
+            <button @click="filter = 'all'" :class="{ 'bg-red-500 text-white': filter === 'all' }" class="px-3 py-1 border rounded text-sm hover:bg-red-100 mr-1">Все</button>
+            <button @click="filter = 'paid'" :class="{ 'bg-red-500 text-white': filter === 'paid' }" class="px-3 py-1 border rounded text-sm hover:bg-red-100 mr-1">Оплаченные</button>
+            <button @click="filter = 'unpaid'" :class="{ 'bg-red-500 text-white': filter === 'unpaid' }" class="px-3 py-1 border rounded text-sm hover:bg-red-100">Неоплаченные</button>
+
+            {% if receipts %}
             {% for receipt in receipts %}
-              <div x-data="{ open: false }" class="border border-gray-300 rounded mb-4 shadow bg-white">
-                <!-- Заголовок чека -->
-                <div @click="open = !open" class="flex items-center justify-between px-4 py-3 cursor-pointer bg-gray-100 hover:bg-gray-200 transition">
+            <div x-data="{ open: false }" x-show="filter === 'all' || (filter === 'paid' && {{ receipt.is_paid|yesno:'true,false' }}) || (filter === 'unpaid' && {{ receipt.is_paid|yesno:'false,true' }})" class="border border-gray-300 rounded mb-4 shadow bg-white mt-4">
+
+              <!-- Заголовок -->
+              <div class="flex justify-between items-stretch bg-gray-100 hover:bg-gray-200 transition cursor-pointer" @click="open = !open">
+                <!-- Левая часть (заголовок + дата) -->
+                <div class="flex-1 px-4 py-3 flex items-center">
                   <h3 class="font-semibold text-lg">Чек #{{ receipt.id }} — {{ receipt.created_at|date:"d.m.Y" }}</h3>
-                  <svg :class="open ? 'rotate-180' : ''" class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" stroke-width="2"
-                      viewBox="0 0 24 24">
+                </div>
+
+                <!-- Иконка -->
+                <div class="px-4 py-3 flex items-center">
+                  <svg :class="open ? 'rotate-180' : ''" class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
                 </div>
+              </div>
 
-                <!-- Детали чека -->
-                <div x-show="open" x-transition class="px-4 py-3 border-t text-sm text-gray-700">
-                  <p>Общий вес: <strong>{{ receipt.total_weight }} кг</strong></p>
-                  <p>Итого: <strong>{{ receipt.total_price }} тг</strong></p>
-                  <p>
-                    Статус оплаты:
-                    <span class="font-semibold {% if receipt.is_paid %}text-green-600{% else %}text-red-600{% endif %}">
-                      {{ receipt.is_paid|yesno:"Оплачен,Не оплачен" }}
-                    </span>
-                  </p>
-                  <ul class="mt-2 list-disc list-inside">
+              <!-- Контент чека -->
+              <div x-show="open" x-transition class="px-4 py-3 border-t text-sm text-gray-700">
+
+                <!-- Основной блок: данные чека + кнопка сбоку -->
+                <div class="flex justify-between items-start gap-4">
+                  <!-- Левая часть: данные -->
+                  <div class="space-y-2">
+                    <p>Общий вес: <strong>{{ receipt.total_weight }} кг</strong></p>
+                    <p>Итого: <strong>{{ receipt.total_price }} тг</strong></p>
+                    <p>
+                      Статус оплаты:
+                      <span class="font-semibold {% if receipt.is_paid %}text-green-600{% else %}text-red-600{% endif %}">
+                        {{ receipt.is_paid|yesno:"Оплачен,Не оплачен" }}
+                      </span>
+                    </p>
+                  </div>
+
+                  <!-- Список трек-кодов -->
+                  <ul class="mt-4 list-disc list-inside">
                     {% for item in receipt.items.all %}
                       <li>{{ item.track_code.track_code }} — {{ item.track_code.weight }} кг</li>
                     {% endfor %}
                   </ul>
+
+                  <!-- Правая часть: кнопка -->
+                  {% if not receipt.is_paid %}
+                  <form method="post" action="{% url 'pay_receipt' receipt.id %}" @click.stop>
+                    {% csrf_token %}
+                    <button type="submit" class="text-lg font-bold text-white rounded items-center">
+                      <img src="{% static 'images/kaspiPayment.png' %}" style="height: 75px; width: 75px;">
+                    </button>
+                  </form>
+                  {% endif %}
                 </div>
               </div>
+            </div>
             {% endfor %}
-          {% else %}
-            <p class="text-gray-500 ml-2">Чеки ещё не сформированы.</p>
-          {% endif %}
+            {% else %}
+            <p class="text-gray-500 ml-2 mt-4">Чеки ещё не сформированы.</p>
+            {% endif %}
           </div>
-      </div>
   </div>
 </div>
   {% endblock %}

@@ -20,6 +20,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="Имя пользователя")
     phone = models.CharField(max_length=20, verbose_name="Телефон")
     pickup = models.CharField(max_length=100, choices=PICKUP_CHOICES, verbose_name="ПВЗ")
+    is_staff = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.user.username} — {self.phone}"
