@@ -1,4 +1,46 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const menuClose = document.getElementById('mobile-menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+    if (menuToggle && menuClose && mobileMenu && mobileMenuOverlay) {
+        function openMenu() {
+            mobileMenu.classList.remove('hidden');
+            mobileMenuOverlay.classList.remove('hidden');
+            // Предотвращаем прокрутку body при открытом меню
+            document.body.style.overflow = 'hidden';
+            // Для обеспечения совместимости с Tailwind, убедимся, что md:hidden не мешает
+            // Это может быть избыточно, но добавляет надежности
+            mobileMenu.classList.remove('md:hidden');
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.add('hidden');
+            mobileMenuOverlay.classList.add('hidden');
+            // Восстанавливаем прокрутку body
+            document.body.style.overflow = '';
+        }
+
+        menuToggle.addEventListener('click', openMenu);
+        menuClose.addEventListener('click', closeMenu);
+        mobileMenuOverlay.addEventListener('click', closeMenu); // Закрытие по клику на оверлей
+
+        // Закрытие меню при изменении размера окна на desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) { // md breakpoint
+                closeMenu();
+            }
+        });
+
+        // Опционально: Закрытие меню при нажатии Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape" && !mobileMenu.classList.contains('hidden')) {
+                closeMenu();
+            }
+        });
+    }
+
     // Калькулятор
     const weightInput = document.getElementById('weight');
     const incrementBtn = document.getElementById('increment');

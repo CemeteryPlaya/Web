@@ -3,24 +3,23 @@
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
         <div class="flex items-center">
             <a href="/" class="text-2xl font-['Pacifico'] text-primary mr-8">
-                <img src="{% static 'images/logo.png' %}" style="height: 50px; width: 50px;" alt="Inter Cargo Logo">
+                <img src="{% static 'images/logo.png' %}" style="height: 50px; width: 50px;">
             </a>
-            <!-- Навигация для десктопа (скрыта на мобильных) -->
-            <nav id="desktop-menu" class="hidden md:flex space-x-8">
+            <nav class="hidden md:flex space-x-8">
                 <a href="/" class="text-gray-900 font-medium hover:text-primary transition">Главная</a>
                 <a href="{% url 'education' %}" class="text-gray-700 hover:text-primary transition">Обучение</a>
                 <a href="{% url 'about' %}" class="text-gray-700 hover:text-primary transition">О компании</a>
             </nav>
         </div>
         <div class="flex items-center space-x-4">
-            <a href="https://www.instagram.com/inter_cargo_trz/" class="w-10 h-10 flex items-center justify-center rounded-full bg-white-100 hover:bg-white-100 transition" target="_blank" rel="noopener noreferrer">
-                <img src="{% static 'images/instagram.svg' %}" style="height: 35px; width: 35px;" alt="Instagram">
+            <a href="https://www.instagram.com/inter_cargo_trz/" class="w-10 h-10 flex items-center justify-center rounded-full bg-white-100 hover:bg-white-100 transition">
+                <img src="{% static 'images/instagram.svg' %}" style="height: 35px; width: 35px;">
             </a>
-            <a href="https://t.me/inter_cargo" class="w-10 h-10 flex items-center justify-center rounded-full bg-white-100 hover:bg-white-100 transition" target="_blank" rel="noopener noreferrer">
-                <img src="{% static 'images/telegram.svg' %}" style="height: 35px; width: 35px;" alt="Telegram">
+            <a href="https://t.me/inter_cargo" class="w-10 h-10 flex items-center justify-center rounded-full bg-white-100 hover:bg-white-100 transition">
+                <img src="{% static 'images/telegram.svg' %}" style="height: 35px; width: 35px;">
             </a>
-            <a href="https://wa.me/77066440624" class="w-10 h-10 flex items-center justify-center rounded-full bg-white-100 hover:bg-white-100 transition" target="_blank" rel="noopener noreferrer">
-                <img src="{% static 'images/whatsapp.svg' %}" style="height: 35px; width: 35px;" alt="WhatsApp">
+            <a href="https://wa.me/77066440624" class="w-10 h-10 flex items-center justify-center rounded-full bg-white-100 hover:bg-white-100 transition">
+                <img src="{% static 'images/whatsapp.svg' %}" style="height: 35px; width: 35px;">
             </a>
             {% if user.is_authenticated %}
                 <a href="{% url 'profile' %}" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-500 hover:bg-black transition" title="Профиль">
@@ -33,11 +32,10 @@
                     </button>
                 </form>
             {% else %}
-                <a href="{% url 'login' %}" class="text-sm text-gray-700 hover:text-primary transition hidden md:inline">Войти</a>
-                <a href="{% url 'register' %}" class="text-sm text-gray-700 hover:text-primary transition hidden md:inline">Регистрация</a>
+                <a href="{% url 'login' %}" class="text-sm text-gray-700 hover:text-primary transition">Войти</a>
+                <a href="{% url 'register' %}" class="text-sm text-gray-700 hover:text-primary transition">Регистрация</a>
             {% endif %}
-            <!-- Кнопка меню для мобильных устройств -->
-            <button id="mobile-menu-toggle" class="md:hidden w-10 h-10 flex items-center justify-center text-gray-900 focus:outline-none" aria-label="Открыть меню">
+            <button class="md:hidden w-10 h-10 flex items-center justify-center">
                 <i class="ri-menu-line text-xl"></i>
             </button>
         </div>
@@ -94,4 +92,3 @@
     <!-- Оверлей для закрытия меню по клику вне его области -->
     <div id="mobile-menu-overlay" class="hidden fixed inset-0 z-30 bg-black bg-opacity-50"></div>
 </header>
-<!-- Убедитесь, что НЕТ закрывающего тега </header> в конце, он уже есть выше -->

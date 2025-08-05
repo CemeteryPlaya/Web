@@ -1,4 +1,60 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // --- Мобильное меню ---
+    // Проверяем, существуют ли элементы меню, чтобы избежать ошибок на страницах без них
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const menuClose = document.getElementById('mobile-menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+    console.log("Проверка наличия элементов меню:", menuToggle, menuClose, mobileMenu, mobileMenuOverlay); // <-- Добавить
+
+    if (menuToggle && menuClose && mobileMenu && mobileMenuOverlay) {
+        console.log("Элементы меню найдены, инициализируем обработчики..."); // <-- Добавить
+
+        function openMenu() {
+            console.log("Функция openMenu вызвана"); // <-- Добавить
+            mobileMenu.classList.remove('hidden');
+            mobileMenuOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            mobileMenu.classList.remove('md:hidden');
+        }
+
+        function closeMenu() {
+            console.log("Функция closeMenu вызвана"); // <-- Добавить
+            mobileMenu.classList.add('hidden');
+            mobileMenuOverlay.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        menuToggle.addEventListener('click', function() {
+            console.log("Клик по кнопке открытия меню"); // <-- Добавить
+            openMenu();
+        });
+        menuClose.addEventListener('click', function() {
+            console.log("Клик по кнопке закрытия меню"); // <-- Добавить
+            closeMenu();
+        });
+        mobileMenuOverlay.addEventListener('click', function() {
+            console.log("Клик по оверлею"); // <-- Добавить
+            closeMenu();
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape" && !mobileMenu.classList.contains('hidden')) {
+                closeMenu();
+            }
+        });
+
+        console.log("Обработчики для меню установлены"); // <-- Добавить
+    }
+    // --- Конец мобильного меню ---
+
     // Калькулятор
     const weightInput = document.getElementById('weight');
     const incrementBtn = document.getElementById('increment');
@@ -65,7 +121,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (phoneInput) {
         // Инициализация
-        phoneInput.value = '';
+        if (!phoneInput.value) {
+            phoneInput.value = '';
+        }
 
         phoneInput.addEventListener('input', (e) => {
             phoneInput.value = formatPhone(e.target.value);
