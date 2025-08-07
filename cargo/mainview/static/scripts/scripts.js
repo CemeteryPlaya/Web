@@ -6,52 +6,95 @@ document.addEventListener('DOMContentLoaded', function () {
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
 
-    console.log("Проверка наличия элементов меню:", menuToggle, menuClose, mobileMenu, mobileMenuOverlay); // <-- Добавить
+    // Проверяем, существуют ли элементы сайдбара
+    const sidebarClose = document.getElementById('mobile-sidebar-close');
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const mobileSidebarOverlay = document.getElementById('mobile-sidebar-overlay');
 
-    if (menuToggle && menuClose && mobileMenu && mobileMenuOverlay) {
-        console.log("Элементы меню найдены, инициализируем обработчики..."); // <-- Добавить
+    if (menuToggle) {
+        // Определяем, аутентифицирован ли пользователь
+        const isAuthenticated = menuToggle.dataset.isAuthenticated === 'true';
 
         function openMenu() {
-            console.log("Функция openMenu вызвана"); // <-- Добавить
-            mobileMenu.classList.remove('hidden');
-            mobileMenuOverlay.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            mobileMenu.classList.remove('md:hidden');
+            if (isAuthenticated && mobileSidebar && mobileSidebarOverlay) {
+                // Открываем мобильный сайдбар для аутентифицированных пользователей
+                mobileSidebar.classList.remove('hidden');
+                mobileSidebarOverlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                // Убедимся, что стандартное меню закрыто
+                if (mobileMenu) mobileMenu.classList.add('hidden');
+                if (mobileMenuOverlay) mobileMenuOverlay.classList.add('hidden');
+            } else if (mobileMenu && mobileMenuOverlay) {
+                // Открываем стандартное мобильное меню для неаутентифицированных
+                mobileMenu.classList.remove('hidden');
+                mobileMenuOverlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                // Убедимся, что сайдбар закрыт (на всякий случай)
+                if (mobileSidebar) mobileSidebar.classList.add('hidden');
+                if (mobileSidebarOverlay) mobileSidebarOverlay.classList.add('hidden');
+            }
         }
 
         function closeMenu() {
-            console.log("Функция closeMenu вызвана"); // <-- Добавить
-            mobileMenu.classList.add('hidden');
-            mobileMenuOverlay.classList.add('hidden');
+            // Закрываем стандартное меню
+            if (mobileMenu) mobileMenu.classList.add('hidden');
+            if (mobileMenuOverlay) mobileMenuOverlay.classList.add('hidden');
+            // Закрываем сайдбар
+            if (mobileSidebar) mobileSidebar.classList.add('hidden');
+            if (mobileSidebarOverlay) mobileSidebarOverlay.classList.add('hidden');
             document.body.style.overflow = '';
         }
 
-        menuToggle.addEventListener('click', function() {
-            console.log("Клик по кнопке открытия меню"); // <-- Добавить
-            openMenu();
-        });
-        menuClose.addEventListener('click', function() {
-            console.log("Клик по кнопке закрытия меню"); // <-- Добавить
-            closeMenu();
-        });
-        mobileMenuOverlay.addEventListener('click', function() {
-            console.log("Клик по оверлею"); // <-- Добавить
-            closeMenu();
-        });
+        menuToggle.addEventListener('click', openMenu);
 
+        // Обработчики для закрытия стандартного меню
+        if (menuClose) {
+            menuClose.addEventListener('click', function() {
+                if (mobileMenu) mobileMenu.classList.add('hidden');
+                if (mobileMenuOverlay) mobileMenuOverlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+        }
+        if (mobileMenuOverlay) {
+            mobileMenuOverlay.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+                mobileMenuOverlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+        }
+
+        // Обработчики для закрытия мобильного сайдбара
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', function() {
+                if (mobileSidebar) mobileSidebar.classList.add('hidden');
+                if (mobileSidebarOverlay) mobileSidebarOverlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+        }
+        if (mobileSidebarOverlay) {
+            mobileSidebarOverlay.addEventListener('click', function() {
+                mobileSidebar.classList.add('hidden');
+                mobileSidebarOverlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+        }
+
+        // Закрытие меню/сайдбара при изменении размера окна на desktop
         window.addEventListener('resize', function() {
-            if (window.innerWidth >= 768) {
-                closeMenu();
+            if (window.innerWidth >= 768) { // md breakpoint
+                closeMenu(); // Используем общую функцию закрытия
             }
         });
 
+        // Опционально: Закрытие меню/сайдбара при нажатии Escape
         document.addEventListener('keydown', function(e) {
-            if (e.key === "Escape" && !mobileMenu.classList.contains('hidden')) {
-                closeMenu();
-            }
+             if (e.key === "Escape") {
+                 if ((mobileMenu && !mobileMenu.classList.contains('hidden')) ||
+                     (mobileSidebar && !mobileSidebar.classList.contains('hidden'))) {
+                     closeMenu();
+                 }
+             }
         });
-
-        console.log("Обработчики для меню установлены"); // <-- Добавить
     }
     // --- Конец мобильного меню ---
 

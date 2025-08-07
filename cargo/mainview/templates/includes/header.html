@@ -13,6 +13,7 @@
             </nav>
         </div>
         <div class="flex items-center space-x-4">
+            <!-- Ссылки на соцсети ... (оставляем как есть) -->
             <a href="https://www.instagram.com/inter_cargo_trz/" class="w-10 h-10 flex items-center justify-center rounded-full bg-white-100 hover:bg-white-100 transition" target="_blank" rel="noopener noreferrer">
                 <img src="{% static 'images/instagram.svg' %}" style="height: 35px; width: 35px;" alt="Instagram">
             </a>
@@ -28,7 +29,7 @@
                 </a>
                 <form method="post" action="{% url 'logout' %}" style="display: inline;">
                 {% csrf_token %}
-                    <button type="submit" class="text-sm text-gray-700 hover:text-primary transition ml-2">
+                    <button type="submit" class="text-sm text-gray-700 hover:text-primary transition ml-2 hidden md:inline">
                         Выйти
                     </button>
                 </form>
@@ -37,13 +38,14 @@
                 <a href="{% url 'register' %}" class="text-sm text-gray-700 hover:text-primary transition hidden md:inline">Регистрация</a>
             {% endif %}
             <!-- Кнопка меню для мобильных устройств -->
-            <button id="mobile-menu-toggle" class="md:hidden w-10 h-10 flex items-center justify-center text-gray-900 focus:outline-none" aria-label="Открыть меню">
+            <!-- Добавим data-атрибут, чтобы JS знал, аутентифицирован ли пользователь -->
+            <button id="mobile-menu-toggle" class="md:hidden w-10 h-10 flex items-center justify-center text-gray-900 focus:outline-none" aria-label="Открыть меню" data-is-authenticated="{{ user.is_authenticated|yesno:'true,false' }}">
                 <i class="ri-menu-line text-xl"></i>
             </button>
         </div>
     </div>
 
-    <!-- Мобильное меню (изначально скрыто) -->
+    <!-- Стандартное мобильное меню (для неаутентифицированных пользователей) -->
     <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-40 bg-white">
         <div class="flex flex-col h-full">
             <div class="flex justify-between items-center p-4 border-b">
@@ -65,6 +67,7 @@
             </nav>
             <div class="p-4 border-t">
                 <div class="flex justify-center space-x-6">
+                    <!-- Ссылки на соцсети ... (оставляем как есть) -->
                      <a href="https://www.instagram.com/inter_cargo_trz/" class="w-8 h-8 flex items-center justify-center rounded-full bg-white-100 hover:bg-white-100 transition" target="_blank" rel="noopener noreferrer">
                         <img src="{% static 'images/instagram.svg' %}" style="height: 28px; width: 28px;" alt="Instagram">
                     </a>
@@ -76,7 +79,7 @@
                     </a>
                 </div>
                  {% if user.is_authenticated %}
-                    <div class="mt-4 flex items-center justify-between">
+                    <div class="mt-4 flex items-center justify-between md:hidden">
                         <a href="{% url 'profile' %}" class="flex items-center text-gray-900 hover:text-primary transition">
                             <i class="ri-user-fill mr-2"></i> Профиль
                         </a>
@@ -91,7 +94,9 @@
             </div>
         </div>
     </div>
-    <!-- Оверлей для закрытия меню по клику вне его области -->
+    <!-- Оверлей для закрытия стандартного меню по клику вне его области -->
     <div id="mobile-menu-overlay" class="hidden fixed inset-0 z-30 bg-black bg-opacity-50"></div>
+
+    <!-- Включаем мобильный сайдбар -->
+    {% include 'includes/m_sidebar.html' %}
 </header>
-<!-- Убедитесь, что НЕТ закрывающего тега </header> в конце, он уже есть выше -->
