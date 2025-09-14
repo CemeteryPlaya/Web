@@ -30,7 +30,9 @@
                 <form method="post" action="{% url 'logout' %}" style="display: inline;">
                 {% csrf_token %}
                     <button type="submit" class="text-sm text-gray-700 hover:text-primary transition ml-2 hidden md:inline">
-                        Выйти
+                        <a class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-500 hover:bg-black transition" title="Выйти">
+                            <i class="ri-logout-box-line text-white"></i>
+                        </a>
                     </button>
                 </form>
             {% else %}
@@ -86,7 +88,9 @@
                         <form method="post" action="{% url 'logout' %}" style="display: inline;">
                             {% csrf_token %}
                             <button type="submit" class="text-gray-700 hover:text-primary transition">
-                                Выйти
+                                <a class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-500 hover:bg-black transition" title="Выйти">
+                                    <i class="ri-logout-box-line text-white"></i>
+                                </a>
                             </button>
                         </form>
                     </div>

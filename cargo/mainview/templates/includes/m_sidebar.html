@@ -13,15 +13,15 @@
     </div>
     <nav class="flex-grow flex flex-col p-4 space-y-4 text-gray-700">
         <!-- Содержимое из includes/sidebar.html -->
-        <a href="#messages" class="flex items-center gap-2 hover:text-red-500 py-2"><i class="ri-mail-line"></i> Сообщения</a>
-        <a href="{% url 'track_codes' %}" class="flex items-center gap-2 hover:text-red-500 py-2"><i class="ri-barcode-line"></i> Трек-коды</a>
+        <a href="#messages" class="flex items-center gap-2 hover:text-red-500 py-2"><i class="ri-mail-line"></i>Сообщения</a>
+        <a href="{% url 'track_codes' %}" class="flex items-center gap-2 hover:text-red-500 py-2"><i class="ri-barcode-line"></i>Трек-коды</a>
         {% if request.user.userprofile.is_staff %}
-        <a href="{% url 'update_tracks' %}" class="flex items-center gap-2 hover:text-red-500 py-2"><i class="ri-shield-user-line"></i> Панель персонала</a>
+        <a href="{% url 'update_tracks' %}" class="flex items-center gap-2 hover:text-red-500 py-2"><i class="ri-shield-user-line"></i>Панель персонала</a>
         {% endif %}
-        <a href="{% url 'delivered_posts' %}" class="flex items-center gap-2 hover:text-red-500 py-2"><i class="ri-bill-line"></i> Чеки</a>
-        <a href="#wallet" class="flex items-center gap-2 hover:text-red-500 py-2"><i class="ri-wallet-3-line"></i> Кошелек</a>
-        <a href="#news" class="flex items-center gap-2 hover:text-red-500 py-2"><i class="ri-news-line"></i> Новости</a>
-        <a href="{% url 'settings' %}" class="flex items-center gap-2 hover:text-red-500 py-2"><i class="ri-settings-line"></i> Настройки</a>
+        <a href="{% url 'delivered_posts' %}" class="flex items-center gap-2 hover:text-red-500 py-2"><i class="ri-bill-line"></i>Чеки</a>
+        <a href="#wallet" class="flex items-center gap-2 hover:text-red-500 py-2"><i class="ri-wallet-3-line"></i>Кошелек</a>
+        <a href="#news" class="flex items-center gap-2 hover:text-red-500 py-2"><i class="ri-news-line"></i>Новости</a>
+        <a href="{% url 'settings' %}" class="flex items-center gap-2 hover:text-red-500 py-2"><i class="ri-settings-line"></i>Настройки</a>
     </nav>
     <div class="p-4 border-t">
         <div class="mt-4 flex items-center justify-between">
@@ -31,7 +31,9 @@
             <form method="post" action="{% url 'logout' %}" style="display: inline;">
                 {% csrf_token %}
                 <button type="submit" class="text-gray-700 hover:text-primary transition">
-                    Выйти
+                    <a class="flex items-center text-gray-900 hover:text-primary transition" title="Выйти">
+                        <i class="ri-logout-box-fill mr-2"></i> Выход
+                    </a>
                 </button>
             </form>
         </div>
