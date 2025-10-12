@@ -338,4 +338,30 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+        // --- Выпадающее меню уведомлений ---
+    const notifButton = document.getElementById('notification-button');
+    const notifDropdown = document.getElementById('notification-dropdown');
+
+    if (notifButton && notifDropdown) {
+        // Переключение выпадашки
+        notifButton.addEventListener('click', function (e) {
+            e.stopPropagation(); // чтобы клик не дошел до window
+            notifDropdown.classList.toggle('hidden');
+        });
+
+        // Клик вне выпадашки — закрываем
+        window.addEventListener('click', function (e) {
+            if (!notifDropdown.contains(e.target) && !notifButton.contains(e.target)) {
+                notifDropdown.classList.add('hidden');
+            }
+        });
+
+        // Escape тоже закрывает
+        document.addEventListener('keydown', function (e) {
+            if (e.key === "Escape") {
+                notifDropdown.classList.add('hidden');
+            }
+        });
+    }
 });

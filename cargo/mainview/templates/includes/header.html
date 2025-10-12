@@ -24,6 +24,34 @@
                 <img src="{% static 'images/whatsapp.svg' %}" style="height: 35px; width: 35px;" alt="WhatsApp">
             </a>
             {% if user.is_authenticated %}
+                <div class="relative">
+                    <button id="notification-button" class="relative w-10 h-10 flex items-center justify-center rounded-full bg-gray-500 hover:bg-black transition" title="Уведомления">
+                        <i class="ri-notification-3-fill text-white text-xl"></i>
+                        {% if unread > 0 %}
+                            <span id="notification-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-1 text-xs font-bold leading-none text-white bg-red-600 rounded-full">
+                                {{ unread }}
+                            </span>
+                        {% endif %}
+                    </button>
+
+                    <!-- Выпадающее окно -->
+                    <div id="notification-dropdown" class="absolute right-0 mt-2 w-80 bg-white border rounded-lg shadow-lg z-50 hidden">
+                        <div class="p-3 font-semibold border-b">Уведомления</div>
+                        <ul class="max-h-60 overflow-y-auto">
+                            {% for notif in user.notifications.all|slice:":5" %}
+                            <li class="px-4 py-2 text-sm {% if not notif.is_read %}bg-gray-100{% endif %}">
+                                {{ notif.message }}
+                                <div class="text-xs text-gray-500">{{ notif.created_at|date:"d.m.Y H:i" }}</div>
+                            </li>
+                            {% empty %}
+                            <li class="px-4 py-2 text-sm text-gray-500">Нет уведомлений</li>
+                            {% endfor %}
+                        </ul>
+                        <div class="p-2 text-center border-t">
+                            <a href="{% url 'notifications' %}" class="text-primary text-sm hover:underline">Все уведомления</a>
+                        </div>
+                    </div>
+                </div>
                 <a href="{% url 'profile' %}" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-500 hover:bg-black transition" title="Профиль">
                     <i class="ri-user-fill text-white"></i>
                 </a>
@@ -40,7 +68,6 @@
                 <a href="{% url 'register' %}" class="text-sm text-gray-700 hover:text-primary transition hidden md:inline">Регистрация</a>
             {% endif %}
             <!-- Кнопка меню для мобильных устройств -->
-            <!-- Добавим data-атрибут, чтобы JS знал, аутентифицирован ли пользователь -->
             <button id="mobile-menu-toggle" class="md:hidden w-10 h-10 flex items-center justify-center text-gray-900 focus:outline-none" aria-label="Открыть меню" data-is-authenticated="{{ user.is_authenticated|yesno:'true,false' }}">
                 <i class="ri-menu-line text-xl"></i>
             </button>
@@ -69,7 +96,6 @@
             </nav>
             <div class="p-4 border-t">
                 <div class="flex justify-center space-x-6">
-                    <!-- Ссылки на соцсети ... (оставляем как есть) -->
                      <a href="https://www.instagram.com/inter_cargo_trz/" class="w-8 h-8 flex items-center justify-center rounded-full bg-white-100 hover:bg-white-100 transition" target="_blank" rel="noopener noreferrer">
                         <img src="{% static 'images/instagram.svg' %}" style="height: 28px; width: 28px;" alt="Instagram">
                     </a>

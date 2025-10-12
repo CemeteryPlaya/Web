@@ -29,6 +29,9 @@ urlpatterns = [
     path('generate-receipt/', views.generate_daily_receipt, name='generate_receipt'),
     path('pay-receipt/<int:receipt_id>/', views.pay_receipt, name='pay_receipt'),
     path('update_tracks/', views.update_tracks, name='update_tracks'),
+    path('notifications/', views.notifications_list, name='notifications'),
+    path('notifications/read/<int:notif_id>/', views.mark_as_read, name='mark_as_read'),
+    path("notifications/mark-as-read/", views.mark_notifications_as_read, name="mark_notifications_as_read"),
 ]
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

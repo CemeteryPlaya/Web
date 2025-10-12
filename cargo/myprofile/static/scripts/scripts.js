@@ -8,32 +8,26 @@ document.addEventListener('DOMContentLoaded', function () {
         function openMenu() {
             mobileMenu.classList.remove('hidden');
             mobileMenuOverlay.classList.remove('hidden');
-            // Предотвращаем прокрутку body при открытом меню
             document.body.style.overflow = 'hidden';
-            // Для обеспечения совместимости с Tailwind, убедимся, что md:hidden не мешает
-            // Это может быть избыточно, но добавляет надежности
             mobileMenu.classList.remove('md:hidden');
         }
 
         function closeMenu() {
             mobileMenu.classList.add('hidden');
             mobileMenuOverlay.classList.add('hidden');
-            // Восстанавливаем прокрутку body
             document.body.style.overflow = '';
         }
 
         menuToggle.addEventListener('click', openMenu);
         menuClose.addEventListener('click', closeMenu);
-        mobileMenuOverlay.addEventListener('click', closeMenu); // Закрытие по клику на оверлей
+        mobileMenuOverlay.addEventListener('click', closeMenu);
 
-        // Закрытие меню при изменении размера окна на desktop
         window.addEventListener('resize', function() {
-            if (window.innerWidth >= 768) { // md breakpoint
+            if (window.innerWidth >= 768) {
                 closeMenu();
             }
         });
 
-        // Опционально: Закрытие меню при нажатии Escape
         document.addEventListener('keydown', function(e) {
             if (e.key === "Escape" && !mobileMenu.classList.contains('hidden')) {
                 closeMenu();
@@ -276,6 +270,32 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!isValid) {
                 e.preventDefault();
                 alert('Пожалуйста, исправьте следующие ошибки:\n' + errorMessage);
+            }
+        });
+    }
+
+        // --- Выпадающее меню уведомлений ---
+    const notifButton = document.getElementById('notification-button');
+    const notifDropdown = document.getElementById('notification-dropdown');
+
+    if (notifButton && notifDropdown) {
+        // Переключение выпадашки
+        notifButton.addEventListener('click', function (e) {
+            e.stopPropagation(); // чтобы клик не дошел до window
+            notifDropdown.classList.toggle('hidden');
+        });
+
+        // Клик вне выпадашки — закрываем
+        window.addEventListener('click', function (e) {
+            if (!notifDropdown.contains(e.target) && !notifButton.contains(e.target)) {
+                notifDropdown.classList.add('hidden');
+            }
+        });
+
+        // Escape тоже закрывает
+        document.addEventListener('keydown', function (e) {
+            if (e.key === "Escape") {
+                notifDropdown.classList.add('hidden');
             }
         });
     }

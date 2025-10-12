@@ -42,3 +42,12 @@ class ReceiptItem(models.Model):
 
     def __str__(self):
         return str(self.track_code)
+
+class Notification(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="notifications")
+    message = models.CharField(max_length=255, verbose_name="Сообщение")
+    is_read = models.BooleanField(default=False, verbose_name="Прочитано")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата")
+
+    def __str__(self):
+        return f"Уведомление для {self.user.username}: {self.message}"
