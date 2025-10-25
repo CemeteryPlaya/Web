@@ -16,22 +16,22 @@ Including another URLconf
 """
 from django.urls import path, include, re_path
 from django.contrib.auth import views as auth_views
-from . import views
+from .views import customer_paycheks, notifications, profile_setting, personal_profile, status_update, track_codes
 
 urlpatterns = [
-    path('track-codes/', views.track_codes_view, name='track_codes'),
-    path('settings/', views.settings, name='settings'),
-    path('update/', views.update_profile, name='update_profile'),
-    path('', views.profile, name='profile'),
+    path('track-codes/', track_codes.track_codes_view, name='track_codes'),
+    path('settings/', profile_setting.settings, name='settings'),
+    path('update/', profile_setting.update_profile, name='update_profile'),
+    path('', personal_profile.profile, name='profile'),
     path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
-    path('delivered-posts/', views.delivered_trackcodes_by_date, name='delivered_posts'),
-    path('receipts/', views.receipt_list, name='receipt_list'),
-    path('generate-receipt/', views.generate_daily_receipt, name='generate_receipt'),
-    path('pay-receipt/<int:receipt_id>/', views.pay_receipt, name='pay_receipt'),
-    path('update_tracks/', views.update_tracks, name='update_tracks'),
-    path('notifications/', views.notifications_list, name='notifications'),
-    path('notifications/read/<int:notif_id>/', views.mark_as_read, name='mark_as_read'),
-    path("notifications/mark-as-read/", views.mark_notifications_as_read, name="mark_notifications_as_read"),
+    path('delivered-posts/', customer_paycheks.delivered_trackcodes_by_date, name='delivered_posts'),
+    path('receipts/', customer_paycheks.receipt_list, name='receipt_list'),
+    path('generate-receipt/', customer_paycheks.generate_daily_receipt, name='generate_receipt'),
+    path('pay-receipt/<int:receipt_id>/', customer_paycheks.pay_receipt, name='pay_receipt'),
+    path('update_tracks/', status_update.update_tracks, name='update_tracks'),
+    path('notifications/', notifications.notifications_list, name='notifications'),
+    path('notifications/read/<int:notif_id>/', notifications.mark_as_read, name='mark_as_read'),
+    path("notifications/mark-as-read/", notifications.mark_notifications_as_read, name="mark_notifications_as_read"),
 ]
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

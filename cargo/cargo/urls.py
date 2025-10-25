@@ -23,7 +23,6 @@ urlpatterns = [
     path('auth/', include('django.contrib.auth.urls')),
     re_path(r"^register/", include('register.urls')),
     re_path(r"^profile/", include('myprofile.urls')),
-    # Admin URL
     path('admin/', admin.site.urls),
     # Main application URLs
     path('', mainview_views.index, name='home'),
