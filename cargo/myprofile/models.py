@@ -9,6 +9,7 @@ class TrackCode(models.Model):
         ('warehouse_cn', 'Принято на склад (Китай)'),
         ('shipped_cn', 'Отправлено со склада (Китай)'),
         ('delivered', 'Доставлено на ПВЗ'),
+        ('claimed', 'Выдано получателю'),
     ]
 
     id = models.AutoField(primary_key=True, verbose_name="№ трек кода")
