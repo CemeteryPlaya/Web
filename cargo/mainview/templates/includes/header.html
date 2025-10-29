@@ -14,13 +14,13 @@
         </div>
         <div class="flex items-center space-x-4">
             <!-- Ссылки на соцсети ... (оставляем как есть) -->
-            <a href="https://www.instagram.com/inter_cargo_trz/" class="w-10 h-10 flex items-center justify-center rounded-full bg-white-100 hover:bg-white-100 transition" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/inter_cargo_trz/" class="w-10 h-10 flex items-center justify-center rounded-full bg-white-100 hover:bg-white-100 transition hidden md:flex" target="_blank" rel="noopener noreferrer">
                 <img src="{% static 'images/instagram.svg' %}" style="height: 35px; width: 35px;" alt="Instagram">
             </a>
-            <a href="https://t.me/inter_cargo" class="w-10 h-10 flex items-center justify-center rounded-full bg-white-100 hover:bg-white-100 transition" target="_blank" rel="noopener noreferrer">
+            <a href="https://t.me/inter_cargo" class="w-10 h-10 flex items-center justify-center rounded-full bg-white-100 hover:bg-white-100 transition hidden md:flex" target="_blank" rel="noopener noreferrer">
                 <img src="{% static 'images/telegram.svg' %}" style="height: 35px; width: 35px;" alt="Telegram">
             </a>
-            <a href="https://wa.me/77066440624" class="w-10 h-10 flex items-center justify-center rounded-full bg-white-100 hover:bg-white-100 transition" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/77066440624" class="w-10 h-10 flex items-center justify-center rounded-full bg-white-100 hover:bg-white-100 transition hidden md:flex" target="_blank" rel="noopener noreferrer">
                 <img src="{% static 'images/whatsapp.svg' %}" style="height: 35px; width: 35px;" alt="WhatsApp">
             </a>
             {% if user.is_authenticated %}
@@ -33,31 +33,47 @@
                             </span>
                         {% endif %}
                     </button>
+                    <!-- Контейнер для уведомлений -->
+                    <div class="relative flex items-center">
+                        <!-- Оболочка уведомлений -->
+                        <div class="relative">
+                            <!-- Кнопка -->
+                            <button id="notif-btn" class="relative focus:outline-none flex items-center justify-center mt-[2px]">
+                                <i class="fa fa-bell text-2xl"></i>
+                                {% if user.notifications.unread.count > 0 %}
+                                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">
+                                    {{ user.notifications.unread.count }}
+                                </span>
+                                {% endif %}
+                            </button>
 
-                    <!-- Выпадающее окно -->
-                    <div id="notification-dropdown" class="absolute right-0 mt-2 w-80 bg-white border rounded-lg shadow-lg z-50 hidden">
-                        <div class="p-3 font-semibold border-b">Уведомления</div>
-                        <ul class="max-h-60 overflow-y-auto">
-                            {% for notif in user.notifications.all|slice:":5" %}
-                            <li class="px-4 py-2 text-sm {% if not notif.is_read %}bg-gray-100{% endif %}">
-                                {{ notif.message }}
-                                <div class="text-xs text-gray-500">{{ notif.created_at|date:"d.m.Y H:i" }}</div>
-                            </li>
-                            {% empty %}
-                            <li class="px-4 py-2 text-sm text-gray-500">Нет уведомлений</li>
-                            {% endfor %}
-                        </ul>
-                        <div class="p-2 text-center border-t">
-                            <a href="{% url 'notifications' %}" class="text-primary text-sm hover:underline">Все уведомления</a>
+                            <!-- Выпадающее окно -->
+                            <div id="notification-dropdown"
+                                class="fixed sm:absolute sm:right-0 sm:left-auto left-1/2 top-[70px] sm:top-auto -translate-x-1/2 sm:translate-x-0 w-80 max-w-[90vw] bg-white border rounded-xl shadow-lg z-50 hidden overflow-hidden">
+                                <div class="p-3 font-semibold border-b text-center sm:text-left">Уведомления</div>
+                                <ul class="max-h-60 overflow-y-auto">
+                                    {% for notif in user.notifications.all|slice:":5" %}
+                                    <li class="px-4 py-2 text-sm {% if not notif.is_read %}bg-gray-100{% endif %}">
+                                        {{ notif.message }}
+                                        <div class="text-xs text-gray-500">{{ notif.created_at|date:"d.m.Y H:i" }}</div>
+                                    </li>
+                                    {% empty %}
+                                    <li class="px-4 py-2 text-sm text-gray-500">Нет уведомлений</li>
+                                    {% endfor %}
+                                </ul>
+                                <div class="p-2 text-center border-t">
+                                    <a href="{% url 'notifications' %}" class="text-primary text-sm hover:underline">Все уведомления</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <a href="{% url 'profile' %}" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-500 hover:bg-black transition" title="Профиль">
+                <a href="{% url 'profile' %}" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-500 hover:bg-black transition hidden md:flex" title="Профиль">
                     <i class="ri-user-fill text-white"></i>
                 </a>
                 <form method="post" action="{% url 'logout' %}" style="display: inline;">
                 {% csrf_token %}
-                    <button type="submit" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-500 hover:bg-black transition" title="Выйти">
+                    <button type="submit" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-500 hover:bg-black transition hidden md:flex" title="Выйти">
                         <i class="ri-logout-box-line text-white"></i>
                     </button>
                 </form>
@@ -93,7 +109,7 @@
                 {% endif %}
             </nav>
             <div class="p-4 border-t">
-                <div class="flex justify-center space-x-6">
+                <div class="flex justify-center space-x-6 hidden md:flex">
                      <a href="https://www.instagram.com/inter_cargo_trz/" class="w-8 h-8 flex items-center justify-center rounded-full bg-white-100 hover:bg-white-100 transition" target="_blank" rel="noopener noreferrer">
                         <img src="{% static 'images/instagram.svg' %}" style="height: 28px; width: 28px;" alt="Instagram">
                     </a>
@@ -105,7 +121,7 @@
                     </a>
                 </div>
                  {% if user.is_authenticated %}
-                    <div class="mt-4 flex items-center justify-between md:hidden">
+                    <div class="mt-4 flex items-center justify-between md:hidden hidden md:flex">
                         <a href="{% url 'profile' %}" class="flex items-center text-gray-900 hover:text-primary transition">
                             <i class="ri-user-fill mr-2"></i> Профиль
                         </a>

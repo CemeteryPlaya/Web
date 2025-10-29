@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-!7th5i00r15laoyrni0==a951h-k+88*1j^_n4(qgbwv086i@b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sabine-unchromed-bryon.ngrok-free.dev', '127.0.0.1:8000', 'localhost']
+
+CSRF_TRUSTED_ORIGINS = ['https://sabine-unchromed-bryon.ngrok-free.dev']
 
 
 # Application definition
@@ -41,7 +43,14 @@ INSTALLED_APPS = [
     'mainview',
     'myprofile',
     'register',
+    'webpush',
 ]
+
+WEBPUSH_SETTINGS = {
+    "VAPID_PUBLIC_KEY": "BCzakKF3TdYhU4TdPoyL-xt_8eRZtXHQBkp_EBQZP9YqdQubyUTEKENcLsmYcVbxEob_iFhKCzqnDENNRqwqsus",
+    "VAPID_PRIVATE_KEY": "ynthGYdIFwDPbjSjb15L0VTHfCPGA_JP-4lVBx_ftJM",
+    "VAPID_ADMIN_EMAIL": "ina.sanzhar@gmail.com"
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,23 +87,23 @@ WSGI_APPLICATION = 'cargo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 #DATABASES = {
 #    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'cargo',
-#        'USER': 'admin',
-#        'PASSWORD': 'admin',
-#        'HOST': 'localhost',
-#        'PORT': '5432',
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
 #    }
 #}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'cargo',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

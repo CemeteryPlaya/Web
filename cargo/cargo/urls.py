@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Main application URLs
     path('', mainview_views.index, name='home'),
+    path('webpush/', include('webpush.urls'))
 ]
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

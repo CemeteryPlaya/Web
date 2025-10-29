@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TrackCode, Receipt, ReceiptItem
+from .models import TrackCode, Receipt, ReceiptItem, CustomerDiscount
 
 # Register your models here.
 @admin.register(TrackCode)
@@ -17,3 +17,9 @@ class ReceiptAdmin(admin.ModelAdmin):
 @admin.register(ReceiptItem)
 class ReceiptItemAdmin(admin.ModelAdmin):
     list_display = ('id', 'receipt', 'track_code')
+
+@admin.register(CustomerDiscount)
+class CustomerDiscountAdmin(admin.ModelAdmin):
+    list_display = ('user', 'amount_per_kg', 'is_temporary', 'active', 'created_at')
+    list_filter = ('is_temporary', 'active')
+    search_fields = ('user__username',)

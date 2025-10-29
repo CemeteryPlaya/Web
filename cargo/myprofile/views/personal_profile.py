@@ -17,6 +17,7 @@ def profile(request):
     warehouse_cn_count = TrackCode.objects.filter(owner=user, status='warehouse_cn').count()
     shipped_cn_count = TrackCode.objects.filter(owner=user, status='shipped_cn').count()
     delivered_count = TrackCode.objects.filter(owner=user, status='delivered').count()
+    claimed_count = TrackCode.objects.filter(owner=user, status='claimed').count()
 
     return render(request, 'profile.html', {
         'user': user,
@@ -26,6 +27,7 @@ def profile(request):
         'warehouse_cn': warehouse_cn_count,
         'shipped_cn_count': shipped_cn_count,
         'delivered': delivered_count,
+        'claimed': claimed_count,
     })
 
 @login_required

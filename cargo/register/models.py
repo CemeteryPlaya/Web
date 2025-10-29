@@ -7,14 +7,13 @@ class UserProfile(models.Model):
         ('akbulak', 'Акбулак 21 (Ozon)'),
         ('pushkina', 'Пушкина 8 (Ozon)'),
         ('tashkentskaya', 'Ташкентская 286 (Ozon)'),
-        ('abaya323', 'Абая 323 (Beer bochka)'),
         ('bayseytovoy', 'Байсеитовой 30 (Ozon)'),
         ('samal', 'Самал 48 (Wildberries)'),
         ('sorokina', 'Сорокина 7 (Ozon)'),
         ('ashimbaeva', 'Ашимбаева 5 (Ozon)'),
-        ('akkozieva', 'Аккозиева 53 (Ozon)'),
         ('abaya286', 'Абая 286 (Ozon)'),
         ('atabaeva', 'Атабаева 105 (Ozon)'),
+        ('koybakova', 'Койбакова 8 (Ozon)'),
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="Имя пользователя")

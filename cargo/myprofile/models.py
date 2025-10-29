@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import User
 
 # Create your models here.
 class TrackCode(models.Model):
@@ -32,7 +31,13 @@ class Receipt(models.Model):
     created_at = models.DateField(auto_now_add=True, verbose_name="Дата создания")
     is_paid = models.BooleanField(default=False, verbose_name="Статус оплаты")
     total_weight = models.DecimalField(max_digits=6, decimal_places=3, default=0, verbose_name="Общий вес (кг)")
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="Сумма чека")
+    total_price = models.DecimalField(max_digits=10, decimal_places=0, default=0, verbose_name="Сумма чека")
+    
+    # 🏬 Пункт выдачи
+    pickup_point = models.CharField(max_length=255, blank=True, null=True, verbose_name="Пункт выдачи")
+    
+    # 💳 Ссылка на оплату (генерируется в зависимости от пункта)
+    payment_link = models.URLField(blank=True, null=True, verbose_name="Ссылка на оплату")
 
     def __str__(self):
         return f"Чек #{self.id} от {self.created_at} — {'Оплачен' if self.is_paid else 'Не оплачен'}"
@@ -52,3 +57,29 @@ class Notification(models.Model):
 
     def __str__(self):
         return f"Уведомление для {self.user.username}: {self.message}"
+    
+class CustomerDiscount(models.Model):
+    """Постоянная или разовая скидка в тенге за 1 кг"""
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="discounts",
+        verbose_name="Пользователь"
+    )
+    amount_per_kg = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        verbose_name="Скидка (₸/кг)"
+    )
+    is_temporary = models.BooleanField(default=False, verbose_name="Разовая скидка")
+    active = models.BooleanField(default=True, verbose_name="Активная скидка")
+    comment = models.CharField(max_length=255, blank=True, verbose_name="Комментарий")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        type_label = "Разовая" if self.is_temporary else "Постоянная"
+        return f"{type_label} скидка {self.amount_per_kg} ₸/кг ({self.user.username})"
+    
+class UserPushSubscription(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    subscription_data = models.JSONField(default=dict, blank=True, null=True)

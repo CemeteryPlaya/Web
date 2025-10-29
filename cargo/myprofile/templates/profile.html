@@ -12,6 +12,7 @@
     <script src="{% static 'scripts/core.js' %}"></script>
     <script src="{% static 'scripts/menu.js' %}"></script>
     <script src="{% static 'scripts/notifications.js' %}"></script>
+    <script src="{% static 'scripts/notifyButton.js' %}"></script>
     <script src="{% static 'scripts/faq.js' %}"></script>
     <script src="{% static 'scripts/phone.js' %}"></script>
     <script src="{% static 'scripts/forms.js' %}"></script>
@@ -47,15 +48,6 @@
             {% endif %}
         </section>
 
-        <!-- Messages Section -->
-        <section id="messages">
-            <h2 class="text-xl font-semibold mb-4"><i class="ri-mail-line text-red-500"></i> Сообщения</h2>
-            <ul class="space-y-3">
-                <li class="bg-white p-4 rounded-lg shadow border border-gray-200">Уведомление о доставке №12345 было успешно завершено.</li>
-                <li class="bg-white p-4 rounded-lg shadow border border-gray-200">Ваш заказ находится на таможенной проверке.</li>
-            </ul>
-        </section>
-
         <!-- Track Codes Section -->
         <section id="trackcodes">
             <h2 class="text-xl font-semibold mb-4"><i class="ri-barcode-line text-red-500"></i> Трек-коды</h2>
@@ -84,30 +76,6 @@
             </div>
         </section>
 
-        <!-- Wallet Section -->
-        <section id="wallet">
-            <h2 class="text-xl font-semibold mb-4"><i class="ri-wallet-3-line text-red-500"></i> Кошелек</h2>
-            <div class="bg-white p-4 rounded-lg shadow border border-gray-200 mb-4">
-                <p><strong>Текущий баланс:</strong> <span class="text-green-600">1 250₽</span></p>
-            </div>
-            <div class="space-y-2">
-                <div class="bg-white p-3 rounded shadow border border-gray-200">+500₽ — Пополнение (01.06.2025)</div>
-                <div class="bg-white p-3 rounded shadow border border-gray-200">−250₽ — Оплата доставки (02.06.2025)</div>
-            </div>
-        </section>
-
-        <!-- News Section -->
-        <section id="news">
-            <h2 class="text-xl font-semibold mb-4"><i class="ri-news-line text-red-500"></i> Новости</h2>
-            <article class="bg-white p-4 rounded-lg shadow border border-gray-200 mb-4">
-                <h3 class="font-bold mb-2 text-gray-800">Обновление тарифов на доставку</h3>
-                <p>С 15 июня вступают в силу новые тарифы для международных перевозок...</p>
-            </article>
-            <article class="bg-white p-4 rounded-lg shadow border border-gray-200">
-                <h3 class="font-bold mb-2 text-gray-800">Новая функция отслеживания</h3>
-                <p>Теперь вы можете видеть полную историю движения вашей посылки в реальном времени!</p>
-            </article>
-        </section>
     </main>
 </div>
 {% endblock %}

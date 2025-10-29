@@ -12,6 +12,7 @@
     <script src="{% static 'scripts/core.js' %}"></script>
     <script src="{% static 'scripts/menu.js' %}"></script>
     <script src="{% static 'scripts/notifications.js' %}"></script>
+    <script src="{% static 'scripts/notifyButton.js' %}"></script>
     <script src="{% static 'scripts/faq.js' %}"></script>
     <script src="{% static 'scripts/phone.js' %}"></script>
     <script src="{% static 'scripts/forms.js' %}"></script>
@@ -48,24 +49,6 @@
                     <div>
                         <label for="phone" class="block font-medium text-gray-700 mb-1">Номер телефона</label>
                         <input type="text" name="phone" id="phone" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-400" value="{{ profile.phone }}" required>
-                    </div>
-
-                    <!-- Pickup -->
-                    <div>
-                        <label for="pickup" class="block font-medium text-gray-700 mb-1">Пункт выдачи</label>
-                        <select id="pickup" name="pickup" value="{{ user.userprofile.pickup }}" required class="w-full px-4 py-3 pr-8 border border-gray-300 rounded appearance-none focus:ring-2 focus:ring-primary focus:border-primary transition">
-                            <option value="akbulak" {% if profile.pickup == "akbulak" %}selected{% endif %}>Акбулак 21 (Ozon)</option>
-                            <option value="pushkina" {% if profile.pickup == "pushkina" %}selected{% endif %}>Пушкина 8 (Ozon)</option>
-                            <option value="tashkentskaya" {% if profile.pickup == "tashkentskaya" %}selected{% endif %}>Ташкентская 286 (Ozon)</option>
-                            <option value="abaya323" {% if profile.pickup == "abaya323" %}selected{% endif %}>Абая 323 (Beer bochka)</option>
-                            <option value="bayseytovoy" {% if profile.pickup == "bayseytovoy" %}selected{% endif %}>Байсеитовой 30 (Ozon)</option>
-                            <option value="samal" {% if profile.pickup == "samal" %}selected{% endif %}>Самал 48 (Wildberries)</option>
-                            <option value="sorokina" {% if profile.pickup == "sorokina" %}selected{% endif %}>Сорокина 7 (Ozon)</option>
-                            <option value="ashimbaeva" {% if profile.pickup == "ashimbaeva" %}selected{% endif %}>Ашимбаева 5 (Ozon)</option>
-                            <option value="akkozieva" {% if profile.pickup == "akkozieva" %}selected{% endif %}>Аккозиева 53 (Ozon)</option>
-                            <option value="abaya286" {% if profile.pickup == "abaya286" %}selected{% endif %}>Абая 286 (Ozon)</option>
-                            <option value="atabaeva" {% if profile.pickup == "atabaeva" %}selected{% endif %}>Атабаева 105 (Ozon)</option>
-                        </select>
                     </div>
 
                     <!-- Submit Button -->

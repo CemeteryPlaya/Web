@@ -12,6 +12,7 @@
     <script src="{% static 'scripts/core.js' %}"></script>
     <script src="{% static 'scripts/menu.js' %}"></script>
     <script src="{% static 'scripts/notifications.js' %}"></script>
+    <script src="{% static 'scripts/notifyButton.js' %}"></script>
     <script src="{% static 'scripts/faq.js' %}"></script>
     <script src="{% static 'scripts/phone.js' %}"></script>
     <script src="{% static 'scripts/forms.js' %}"></script>
@@ -26,7 +27,6 @@
 
     {% block content %}
 
-    
     <div class="flex min-h-screen">
     {% include 'includes/sidebar.html' %}
 
@@ -42,7 +42,7 @@
                 <span class="text-xs text-gray-500">{{ notif.created_at|date:"d.m.Y H:i" }}</span>
                 </div>
                 {% if not notif.is_read %}
-                <a href="{% url 'mark_notification_read' notif.id %}" class="text-blue-500 text-sm hover:underline">Отметить прочитанным</a>
+                <a href="{% url 'mark_as_read' notif.id %}" class="text-blue-500 text-sm hover:underline">Отметить прочитанным</a>
                 {% endif %}
             </div>
             {% empty %}

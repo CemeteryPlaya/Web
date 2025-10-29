@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from myprofile.models import TrackCode
+from myprofile.models import TrackCode, Notification
 from register.models import UserProfile
 from decimal import Decimal
 from datetime import datetime
@@ -41,8 +41,11 @@ def update_tracks(request):
         created = 0
 
         for i, code in enumerate(track_codes):
+            track = None
             try:
                 track = TrackCode.objects.get(track_code=code)
+                old_status = track.status
+
                 track.status = status
                 track.update_date = update_date
                 if status == 'delivered':
@@ -56,12 +59,19 @@ def update_tracks(request):
                         return redirect('update_tracks')
                 track.save()
                 updated += 1
+
+                if old_status != status:
+                    Notification.objects.create(
+                        user=track.owner,
+                        message=f"📦 Ваш трек-код {track.track_code} обновлен: {track.get_status_display()}"
+                    )
+
             except TrackCode.DoesNotExist:
                 if status == 'delivered':
                     try:
                         user = User.objects.get(username=usernames[i])
                         UserProfile.objects.get(user=user)
-                        TrackCode.objects.create(
+                        track = TrackCode.objects.create(
                             track_code=code,
                             status=status,
                             update_date=update_date,
@@ -69,6 +79,12 @@ def update_tracks(request):
                             weight=Decimal(weights[i])
                         )
                         created += 1
+
+                        Notification.objects.create(
+                            user=user,
+                            message=f"📦 Добавлен новый трек-код {track.track_code}: {track.get_status_display()}"
+                        )
+
                     except (User.DoesNotExist, UserProfile.DoesNotExist):
                         messages.error(request, f"Пользователь '{usernames[i]}' не найден.")
                         return redirect('update_tracks')

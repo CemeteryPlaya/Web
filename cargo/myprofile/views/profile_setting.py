@@ -15,8 +15,7 @@ def settings(request):
 
     return render(request, "settings.html", {
         'user': user,
-        'profile': profile,
-        'pickup': profile.pickup if profile else ''
+        'profile': profile
     })
 
 @login_required
@@ -25,7 +24,6 @@ def update_profile(request):
     user = request.user
     email = request.POST.get('email')
     phone = request.POST.get('phone')
-    pickup = request.POST.get('pickup')
 
     if email:
         user.email = email
@@ -38,8 +36,6 @@ def update_profile(request):
 
     if phone:
         profile.phone = phone
-    if pickup:
-        profile.pickup = pickup
     profile.save()
 
     messages.success(request, "Профиль успешно обновлен.")
