@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-!7th5i00r15laoyrni0==a951h-k+88*1j^_n4(qgbwv086i@b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['sabine-unchromed-bryon.ngrok-free.dev', '127.0.0.1:8000', 'localhost']
+ALLOWED_HOSTS = ['sabine-unchromed-bryon.ngrok-free.dev', '127.0.0.1:8000', 'localhost', 'cargointer.kz']
 
 CSRF_TRUSTED_ORIGINS = ['https://sabine-unchromed-bryon.ngrok-free.dev']
 
@@ -129,7 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-kz'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Almaty'
 
 USE_I18N = True
 

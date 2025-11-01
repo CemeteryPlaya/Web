@@ -64,4 +64,3 @@ def register_view(request):
 
 def registration(request):
     return render(request, "registration.html")
-
